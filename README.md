@@ -1,1 +1,1 @@
-# template-assignment
+# CS 100 Programming Project
