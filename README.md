@@ -3,7 +3,7 @@ Spring 2019
 
 Yiming Guo  (SID:X670427)
 
-Yulin Liang (SID:X671565)
+Yulin Liang   (SID:X671565)
 # Introduction
 
 # Diagram
