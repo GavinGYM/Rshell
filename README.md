@@ -9,6 +9,7 @@ This is a command shell called rshell in C++ which is made by Yulin Liang and Yi
 
 1.	Print a command prompt (e.g. `$`)
 2.	Read in a line of command(s) (and connector(s)) from standard input
+>The connector is an optional way you can run multiple commands at once. If a command is followed by ;, then the next command is always >executed; if a command is followed by &&, then the next command is executed only if the first one succeeds; if a command is followed by >||, then the next command is executed only if the first one fails. 
 3.	Execute the appropriate commands using fork, execvp, and waitpid
 
 We designed this program by using composite pattern.
