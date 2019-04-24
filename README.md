@@ -44,6 +44,25 @@ We designed this program by using composite pattern.
   }
   ```
    #### ExeArgu
+   ```cpp
+  class ExeArgu{
+   string exe;
+   string argu;
+  public:
+   ExeArgu (string e, string a) : exe (e), argu (a){}
+   ~Rshellbase (){
+    delete exe;
+    delete argu;
+   }
+   bool Operate(){
+    /*
+    Execute the command by passing the string exe and string argu.
+    If the command succeeds, return true;
+    If it failed, return false.
+    */
+   }
+  }
+  ```
    #### Connector
    ##### And, Or, Semicolon
    #### Command
