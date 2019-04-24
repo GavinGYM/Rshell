@@ -45,7 +45,7 @@ We designed this program by using composite pattern.
   ```
    #### ExeArgu
    ```cpp
-  class ExeArgu{
+  class ExeArgu : public Rshellbase{
    string exe;
    string argu;
   public:
