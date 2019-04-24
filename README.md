@@ -17,11 +17,11 @@ We designed this program by using composite pattern.
 # Diagram
 
 # Classes
--Rshellbase
-  - ExeArgu
-  - Connector
-    - And, Or, Semicolon
-  - Command
+  -Rshellbase
+    - ExeArgu
+    - Connector
+      - And, Or, Semicolon
+    - Command
 # Prototypes/Research
 
 # Development and Testing Roadmap
