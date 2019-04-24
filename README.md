@@ -18,6 +18,27 @@ We designed this program by using composite pattern.
 
 # Classes
  - Rshellbase
+  ```cpp
+  class Rshellbase{
+   string input;
+  public:
+   Rshellbase (string s) : input (s){}
+   ~Rshellbase (){
+    delete input;
+   }
+   virtual Operate();
+   bool Disintegrate(ExeArgu*,Connector*){
+    /*
+    The input string looks like this:
+    
+    $ executable [argumentList] [connector]
+
+    This function is used to disintegrate the input string. It passes the "executable" and "[argumentList]" part to the ExeArgu[](which is an array of objects), and passes the "[connector]" part to the Connector[](which is also an array of objects).
+    These two arrays will be paired using subscripts
+    */
+   }
+  }
+  ```
    - ExeArgu
    - Connector
      - And, Or, Semicolon
