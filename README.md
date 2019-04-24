@@ -33,7 +33,9 @@ We designed this program by using composite pattern.
     
     $ executable [argumentList] [connector]
 
-    This function is used to disintegrate the input string. It passes the "executable" and "[argumentList]" part to the ExeArgu[](which is an array of objects), and passes the "[connector]" part to the Connector[](which is also an array of objects).
+    This function is used to disintegrate the input string. It passes the "executable" and "[argumentList]" part 
+    to the ExeArgu[](which is an array of objects), and passes the "[connector]" part to the Connector[]
+    (which is also an array of objects).
     These two arrays will be paired using subscripts
     */
    }
