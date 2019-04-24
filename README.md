@@ -17,7 +17,7 @@ We designed this program by using composite pattern.
 # Diagram
 
 # Classes
- - Rshellbase
+ ### Rshellbase
   ```cpp
   class Rshellbase{
    string input;
@@ -43,10 +43,10 @@ We designed this program by using composite pattern.
    }
   }
   ```
-   - ExeArgu
-   - Connector
-     - And, Or, Semicolon
-   - Command
+   #### ExeArgu
+   #### Connector
+     ##### And, Or, Semicolon
+   #### Command
 # Prototypes/Research
 
 # Development and Testing Roadmap
