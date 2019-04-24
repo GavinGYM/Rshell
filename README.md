@@ -45,7 +45,7 @@ We designed this program by using composite pattern.
   ```
    #### ExeArgu
    #### Connector
-     ##### And, Or, Semicolon
+   ##### And, Or, Semicolon
    #### Command
 # Prototypes/Research
 
