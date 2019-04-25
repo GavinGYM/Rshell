@@ -27,7 +27,26 @@ We designed this program by using composite pattern.
     delete input;
    }
    virtual Operate();
-   bool Disintegrate(ExeArgu*,Connector*){
+   bool Disintegrate(ExeArgu exeargu[],Connector connector[]){
+    string subinput;
+    subinput = this.string;
+    int i=0;
+    while(there is still a "&&", "||" or ";" in subinput){
+     string cmd;
+     cmd = subinput.substr(everything before a "&&", "||" or ";");
+     exeargu[i]->exe = cmd.substr(the executable part of the cmd);
+     exeargu[i]->argu = cmd.substr(the [argumentList] part of the cmd);
+     if(the [connector] is "&&"){
+      connector[i] = new And();
+     }
+     else if(the [connector] is "||"){
+      connector[i] = new Or();
+     }
+     else if(the [connector] is ";"){
+      connector[i] = new Semicolon();
+     }
+     i++;
+    }
     /*
     The input string looks like this:
     
@@ -40,6 +59,7 @@ We designed this program by using composite pattern.
     (which is also an array of objects).
     These two arrays will be paired by using their subscripts.
     */
+    
    }
   }
   ```
