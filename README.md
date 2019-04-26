@@ -146,5 +146,13 @@ We designed this program by using composite pattern.
 # Prototypes/Research
 
 # Development and Testing Roadmap
-1. - [ ] This is a complete item
-2. - [ ] This is an incomplete item
+1. - [ ] Build Rshellbase class
+2. - [ ] Unit test of Rshellbase class
+3. - [ ] Bulid ExeArgu class
+4. - [ ] Unit test of ExeArgu class
+5. - [ ] Build Connector class and "And, Or, Semicolon" subclass
+6. - [ ] Unit test of Connector and it's subclass
+7. - [ ] Bulid Command class
+8. - [ ] Unit test of Command class
+9. - [ ] Integration test of Rshellbase class, ExeArgu class, Connector class and Command class
+10. - [ ] Build main.cpp
