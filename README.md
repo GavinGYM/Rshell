@@ -15,7 +15,7 @@ This is a command shell called rshell in C++ which is made by Yulin Liang and Yi
 We designed this program by using composite pattern.
 
 # Diagram
-
+![Image of Rshell UML](https://github.com/cs100/spring-2019-assignment-yiming_and_yulin/blob/master/images/Rshell_UML.png?raw=true)
 # Classes
  ### Rshellbase
   ```cpp
