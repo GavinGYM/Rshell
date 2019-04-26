@@ -27,7 +27,7 @@ We designed this program by using composite pattern.
     delete input;
    }
    virtual Operate();
-   bool Disintegrate(ExeArgu exeargu[],Connector connector[]){
+   bool Disintegrate(ExeArgu exeargu[], Connector connector[], Command command[]){
     string subinput;
     subinput = this.string;
     int i=0;
@@ -45,8 +45,16 @@ We designed this program by using composite pattern.
      else if(the [connector] is ";"){
       connector[i] = new Semicolon();
      }
+     command[i]->exeArgu = exeargu[i];
+     command[i]->connector = connector[i];
      i++;
     }
+    //this is for the last command which don't have a connector following it
+    string cmd;
+    cmd = subinput.substr(everything before a "&&", "||" or ";");
+    exeargu[i]->exe = cmd.substr(the executable part of the cmd);
+    exeargu[i]->argu = cmd.substr(the [argumentList] part of the cmd);
+    command[i]->exeArgu = exeargu[i];
     /*
     The input string looks like this:
     
@@ -75,17 +83,66 @@ We designed this program by using composite pattern.
     delete argu;
    }
    bool Operate(){
-    /*
-    Execute the command by passing the string exe and string argu.
-    If the command succeeds, return true;
-    If it failed, return false.
-    */
+    if(Execute the command by passing the string exe and string argu){
+     return true;
+    }
+    else{
+     return false;
+    }
    }
   }
   ```
    #### Connector
+   ```cpp
+  class Connector : public Rshellbase{
+  public:
+   Connector () {}
+   ~Connector (){
+   }
+   virtual Operate(){}
+  }
+  ```
    ##### And, Or, Semicolon
+   ```cpp
+   class And(Or,Semicolon) : public Connector{
+   public:
+    bool Operate(bool result){
+     // This part of the code is different for these three classes
+     // The "And" class
+     if(result){
+      return true;
+     }
+     else{
+      return false;
+     }
+     // The "Or" class
+     if(result){
+      return false;
+     }
+     else{
+      return true;
+     }
+     // The "Semicolon" class
+     return true;
+    }
+   }
+   ```
    #### Command
+   ```cpp
+  class Command : public Rshellbase{
+   Rshellbase exeArgu;
+   Rshellbase connector;
+  public:
+   Command (Rshellbase e, Rshellbase c) : exeArgu (e), connector (c){}
+   ~Command (){
+    delete exeArgu;
+    delete connector;
+   }
+   bool Operate(){
+    return connector.Operate(exeArgu.Operate());
+   }
+  }
+  ```
 # Prototypes/Research
 
 # Development and Testing Roadmap
