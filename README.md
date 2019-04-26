@@ -146,13 +146,13 @@ We designed this program by using composite pattern.
 # Prototypes/Research
 
 # Development and Testing Roadmap
-1. - [ ] Build Rshellbase class
-2. - [ ] Unit test of Rshellbase class
-3. - [ ] Bulid ExeArgu class
-4. - [ ] Unit test of ExeArgu class
-5. - [ ] Build Connector class and "And, Or, Semicolon" subclass
-6. - [ ] Unit test of Connector and it's subclass
-7. - [ ] Bulid Command class
-8. - [ ] Unit test of Command class
-9. - [ ] Integration test of Rshellbase class, ExeArgu class, Connector class and Command class
-10. - [ ] Build main.cpp
+1. - [ ] [Build Rshellbase class](https://github.com/cs100/spring-2019-assignment-yiming_and_yulin/issues/3)
+2. - [ ] [Unit test of Rshellbase class](https://github.com/cs100/spring-2019-assignment-yiming_and_yulin/issues/4)
+3. - [ ] [Bulid ExeArgu class](https://github.com/cs100/spring-2019-assignment-yiming_and_yulin/issues/5)
+4. - [ ] [Unit test of ExeArgu class](https://github.com/cs100/spring-2019-assignment-yiming_and_yulin/issues/6)
+5. - [ ] [Build Connector class and "And, Or, Semicolon" subclass](https://github.com/cs100/spring-2019-assignment-yiming_and_yulin/issues/7)
+6. - [ ] [Unit test of Connector and it's subclass](https://github.com/cs100/spring-2019-assignment-yiming_and_yulin/issues/8)
+7. - [ ] [Bulid Command class](https://github.com/cs100/spring-2019-assignment-yiming_and_yulin/issues/9)
+8. - [ ] [Unit test of Command class](https://github.com/cs100/spring-2019-assignment-yiming_and_yulin/issues/10)
+9. - [ ] [Integration test of Rshellbase class, ExeArgu class, Connector class and Command class](https://github.com/cs100/spring-2019-assignment-yiming_and_yulin/issues/11)
+10. - [ ] [Build main.cpp](https://github.com/cs100/spring-2019-assignment-yiming_and_yulin/issues/12)
