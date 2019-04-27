@@ -13,8 +13,11 @@ This is a command shell called rshell in C++ which is made by Yulin Liang and Yi
 3.	Execute the appropriate commands using fork, execvp, and waitpid
 
 We designed this program by using composite pattern.
+
 Here's a brief overview of how the inputs are ingested, transformed into classes and structures, and processed.
+
 After we get the input from user, we paseed it to an Rshellbase object. This Rshellbase object will use the Disintegrate function to disintegrate the string, and we will create a ExeArgu object with the executable and argumentlist part of the string, and create a Connector object with the connector part of the string. After this, we will create a Command object which contains the previously created ExeArgu object and Connector object. 
+
 Then the Command object will call the ExeArgu object to execute the command, and pass the result (succeed or not) to the connector object. Depends on the type of the connector object, it will return a value to judge whether to execute the next ExeArgu object or not.
 
 # Diagram
