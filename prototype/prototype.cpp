@@ -20,7 +20,11 @@ int main(){
 		
 		char *argv[]={"-a",NULL};
 		char* path = "ls";
-		execvp(path,argv);
+		
+		int a = execvp(path,argv);
+		if( a == -1 ){
+			cout << "execution fails!" << endl;
+		}
 		exit(0);
 	}	
 	else{
