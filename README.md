@@ -156,7 +156,7 @@ Then the Command object will call the ExeArgu object to execute the command, and
 3. execvp() looks for the file name that matches the first parameter file in the directory indicated by the PATH environment variable, finds it, executes it, and passes the second argument to the file to be executed. It doesn’t return any value if it’s successful, but it will return -1 if it fails.
 
 First, we will use the fork() to create a child process, and use the waitpid() to suspends the parent process to see what’s going on in the child process.  Then, we will disintegrate the string types of commands that we input into string arrays of execution, arguments and connectors. Then we will give execvp() these parameters to execute all of the commands.  
-#### 
+#### Seperators
 1. ; Commands separated by semicolon are executed sequentially, and subsequent commands are executed even if the intermediate command is not used in the right way, but it will print associated error.
 2. && If the first commands fails, then the following command won’t be executed.
 3. || If the first commands successes, then the following command won’t be executed.
