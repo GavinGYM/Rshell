@@ -4,6 +4,7 @@
 //#include "command.h"
 #include <string>
 #include <vector>
+#include <climits>
 using namespace std;
 
 class ExeArgu;
