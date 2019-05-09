@@ -9,3 +9,13 @@ bool ExeArgu::Operate()
 		return false;
 	}
 }
+
+string ExeArgu::getExe()
+{
+	return this->exe;
+}
+
+string ExeArgu::getArgu()
+{
+	return this->argu;
+}
