@@ -15,15 +15,15 @@ TEST(RshellBaseTest, DisintegrateTest) {
 	ASSERT_EQ(con.size(), 5);
 	ASSERT_EQ(com.size(), 5);
 	ASSERT_EQ(ea.size(), 5);
-	EXPECT_EQ(ea.at(0)->getExe, "ls");
-	EXPECT_EQ(ea.at(0)->getArgu, "");
-	EXPECT_EQ(ea.at(1)->getExe, "echo");
-	EXPECT_EQ(ea.at(1)->getArgu, "hello");
-	EXPECT_EQ(ea.at(2)->getExe, "mkdir");
-	EXPECT_EQ(ea.at(2)->getArgu, "test");
-	EXPECT_EQ(ea.at(3)->getExe, "echo");
-	EXPECT_EQ(ea.at(3)->getArgu, "\"hello && goodbye\"");
-	EXPECT_EQ(ea.at(4)->getExe, "git");
+	EXPECT_EQ(ea.at(0)->getExe(), "ls");
+	EXPECT_EQ(ea.at(0)->getArgu(), "");
+	EXPECT_EQ(ea.at(1)->getExe(), "echo");
+	EXPECT_EQ(ea.at(1)->getArgu(), "hello");
+	EXPECT_EQ(ea.at(2)->getExe(), "mkdir");
+	EXPECT_EQ(ea.at(2)->getArgu(), "test");
+	EXPECT_EQ(ea.at(3)->getExe(), "echo");
+	EXPECT_EQ(ea.at(3)->getArgu(), "\"hello && goodbye\"");
+	EXPECT_EQ(ea.at(4)->getExe(), "git");
 	EXPECT_EQ(ea.at(4)->getArgu, "status");
 
 }
