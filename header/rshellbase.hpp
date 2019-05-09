@@ -52,21 +52,33 @@ public:
 
 class Semicolon : public Connector {
 public:
+	Semicolon() {}
+	~Semicolon() {
+	}
 	bool Operate(bool result);
 };
 
 class End : public Connector {
 public:
+	End() {}
+	~End() {
+	}
 	bool Operate(bool result);
 };
 
 class Or : public Connector {
 public:
+	Or() {}
+	~Or() {
+	}
 	bool Operate(bool result);
 };
 
 class And : public Connector {
 public:
+	And() {}
+	~And() {
+	}
 	bool Operate(bool result);
 };
 
