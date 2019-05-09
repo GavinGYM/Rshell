@@ -24,7 +24,7 @@ TEST(RshellBaseTest, DisintegrateTest) {
 	EXPECT_EQ(ea.at(3)->getExe(), "echo");
 	EXPECT_EQ(ea.at(3)->getArgu(), "\"hello && goodbye\"");
 	EXPECT_EQ(ea.at(4)->getExe(), "git");
-	EXPECT_EQ(ea.at(4)->getArgu, "status");
+	EXPECT_EQ(ea.at(4)->getArgu(), "status");
 
 }
 
