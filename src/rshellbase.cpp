@@ -96,6 +96,10 @@ bool Rshellbase::Disintegrate(vector<ExeArgu*>& exeargu, vector<Connector*>& con
 	ExeArgu *newea = new ExeArgu(cmd.substr(0, cmd.find(" ")), argu);
 	exeargu.push_back(newea);
 	Connector *newcon = new End();
+	connector.push_back(newcon);
+
+	Command *newcom = new Command(newea, newcon);
+	command.push_back(newcom);
 
 	//exeargu[i]->exe = cmd.substr(0, cmd.find(" "));
 	//exeargu[i]->argu = cmd.substr(cmd.find(" ") + 1, cmd.size()-1);
