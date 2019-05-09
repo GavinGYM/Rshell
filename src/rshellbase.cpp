@@ -68,13 +68,13 @@ bool Rshellbase::Disintegrate(vector<ExeArgu*>& exeargu, vector<Connector*>& con
 		//exeargu[i]->argu = cmd.substr(cmd.find(" ")+1,cmd.size()-1);
 
 		Connector *newcon;
-		if (con = '&') {
+		if (con == '&') {
 			newcon = new And();
 		}
-		else if (con = '|') {
+		else if (con == '|') {
 			newcon = new Or();
 		}
-		else if (con = ';') {
+		else if (con == ';') {
 			newcon = new Semicolon();
 		}
 		connector.push_back(newcon);
