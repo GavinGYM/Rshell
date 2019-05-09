@@ -64,27 +64,24 @@ bool Rshellbase::Disintegrate(vector<ExeArgu*>& exeargu, vector<Connector*>& con
 
 		ExeArgu *newea = new ExeArgu(cmd.substr(0, cmd.find(" ")), argu);
 		exeargu.push_back(newea);
-		//exeargu[i]->exe = cmd.substr(0,cmd.find(" "));
-		//exeargu[i]->argu = cmd.substr(cmd.find(" ")+1,cmd.size()-1);
-
-		Connector *newcon;
 		if (con == '&') {
-			newcon = new And();
+			And *newcon = new And();
+			connector.push_back(newcon);
+			Command *newcom = new Command(newea, newcon);
+			command.push_back(newcom);
 		}
 		else if (con == '|') {
-			newcon = new Or();
+			Or *newcon = new Or();
+			connector.push_back(newcon);
+			Command *newcom = new Command(newea, newcon);
+			command.push_back(newcom);
 		}
 		else if (con == ';') {
-			newcon = new Semicolon();
+			Semicolon *newcon = new Semicolon();
+			connector.push_back(newcon);
+			Command *newcom = new Command(newea, newcon);
+			command.push_back(newcom);
 		}
-		connector.push_back(newcon);
-
-		Command *newcom = new Command(newea, newcon);
-		command.push_back(newcom);
-		//command[i]->exeArgu = exeargu[i];
-		//command[i]->connector = connector[i];
-
-		//i++;
 	}
 	//this is for the last command which don't have a connector following it
 	string cmd;
@@ -95,7 +92,7 @@ bool Rshellbase::Disintegrate(vector<ExeArgu*>& exeargu, vector<Connector*>& con
 	}
 	ExeArgu *newea = new ExeArgu(cmd.substr(0, cmd.find(" ")), argu);
 	exeargu.push_back(newea);
-	Connector *newcon = new End();
+	End *newcon = new End();
 	connector.push_back(newcon);
 
 	Command *newcom = new Command(newea, newcon);
