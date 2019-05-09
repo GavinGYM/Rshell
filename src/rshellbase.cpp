@@ -13,28 +13,28 @@ bool Rshellbase::Disintegrate(vector<ExeArgu*>& exeargu, vector<Connector*>& con
 			pos = subinput.find("&&");
 			con = '&';
 		}
-		if (subinput.find("||") != string::npos && subinput.find("||") < pos) {
+		if (subinput.find("||") != string::npos && (subinput.find("||") < pos)) {
 			pos = subinput.find("||");
 			con = '|';
 		}
-		if (subinput.find(";") != string::npos && subinput.find(";") < pos) {
+		if (subinput.find(";") != string::npos && (subinput.find(";") < pos)) {
 			pos = subinput.find(";");
 			con = ';';
 		}
 		
 		//This if for the case we have a quotation mark.
-		if (subinput.find('"') != string::npos && subinput.find('"') < pos) {
+		if (subinput.find('"') != string::npos && (subinput.find('"') < pos)) {
 			int quotationEnd = subinput.find('"', subinput.find('"') + 1);
 			pos = INT_MAX;
 			if (subinput.find("&&", quotationEnd + 1) != string::npos) {
 				pos = subinput.find("&&");
 				con = '&';
 			}
-			if (subinput.find("||", quotationEnd + 1) != string::npos && subinput.find("||") < pos) {
+			if (subinput.find("||", quotationEnd + 1) != string::npos && (subinput.find("||") < pos)) {
 				pos = subinput.find("||");
 				con = '|';
 			}
-			if (subinput.find(";", quotationEnd + 1) != string::npos && subinput.find(";") < pos) {
+			if (subinput.find(";", quotationEnd + 1) != string::npos && (subinput.find(";") < pos)) {
 				pos = subinput.find(";");
 				con = ';';
 			}
@@ -64,24 +64,19 @@ bool Rshellbase::Disintegrate(vector<ExeArgu*>& exeargu, vector<Connector*>& con
 
 		ExeArgu *newea = new ExeArgu(cmd.substr(0, cmd.find(" ")), argu);
 		exeargu.push_back(newea);
-		if (con == '&') {
-			And *newcon = new And();
-			connector.push_back(newcon);
-			Command *newcom = new Command(newea, newcon);
-			command.push_back(newcom);
-		}
-		else if (con == '|') {
-			Or *newcon = new Or();
-			connector.push_back(newcon);
-			Command *newcom = new Command(newea, newcon);
-			command.push_back(newcom);
-		}
-		else if (con == ';') {
-			Semicolon *newcon = new Semicolon();
-			connector.push_back(newcon);
-			Command *newcom = new Command(newea, newcon);
-			command.push_back(newcom);
-		}
+		//exeargu[i]->exe = cmd.substr(0,cmd.find(" "));
+		//exeargu[i]->argu = cmd.substr(cmd.find(" ")+1,cmd.size()-1);
+
+		Connector *newcon;
+		newcon = new Connector(con);
+		connector.push_back(newcon);
+
+		Command *newcom = new Command(newea, newcon);
+		command.push_back(newcom);
+		//command[i]->exeArgu = exeargu[i];
+		//command[i]->connector = connector[i];
+
+		//i++;
 	}
 	//this is for the last command which don't have a connector following it
 	string cmd;
@@ -92,7 +87,7 @@ bool Rshellbase::Disintegrate(vector<ExeArgu*>& exeargu, vector<Connector*>& con
 	}
 	ExeArgu *newea = new ExeArgu(cmd.substr(0, cmd.find(" ")), argu);
 	exeargu.push_back(newea);
-	End *newcon = new End();
+	Connector *newcon = new Connector('.');
 	connector.push_back(newcon);
 
 	Command *newcom = new Command(newea, newcon);
