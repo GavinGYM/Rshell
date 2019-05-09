@@ -38,6 +38,8 @@ public:
 		delete &this->argu;
 	}
 	bool Operate();
+	string getExe();
+	string getArgu();
 };
 
 class Connector : public Rshellbase {
