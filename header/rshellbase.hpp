@@ -51,6 +51,7 @@ public:
 	~Connector() {
 	}
 	bool Operate(bool result);
+	char GetSign();
 };
 
 class Semicolon : public Connector {
