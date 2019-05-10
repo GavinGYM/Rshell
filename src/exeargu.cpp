@@ -21,9 +21,7 @@ bool ExeArgu::Operate()
 
 		char *argv[] = { const_cast<char*>(this->exe.c_str()), const_cast<char*>(this->argu.c_str()),NULL };
 		char* path = const_cast<char*>(this->exe.c_str());
-		
-		cout << argv[0] << endl;
-		cout << path << endl;
+	
 		int a = execvp(path, argv);
 		if (a == -1) {
 			perror("execution fails!");
