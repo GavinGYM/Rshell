@@ -19,7 +19,7 @@ bool ExeArgu::Operate()
 	else if (pid == 0) {
 		//sleep(2);
 
-		char *argv = { const_cast<char*>(this->argu.c_str()),NULL };
+		char *argv[] = { const_cast<char*>(this->argu.c_str()),NULL };
 		char* path = const_cast<char*>(this->exe.c_str());
 
 		int a = execvp(path, argv);
