@@ -4,7 +4,7 @@
 #include <iostream>
 using namespace std;
 
-TEST(RshellBaseTest, DisintegrateTest) {
+TEST(RshellBaseTest, DisintegrateTest_ExeArgu) {
 	vector<Connector*> con;
 	vector<Command*> com;
 	vector<ExeArgu*> ea;
@@ -25,6 +25,24 @@ TEST(RshellBaseTest, DisintegrateTest) {
 	EXPECT_EQ(ea.at(3)->getArgu(), "\"hello && goodbye\"");
 	EXPECT_EQ(ea.at(4)->getExe(), "git");
 	EXPECT_EQ(ea.at(4)->getArgu(), "status");
+}
+
+TEST(RshellBaseTest, DisintegrateTest_Connector) {
+	vector<Connector*> con;
+	vector<Command*> com;
+	vector<ExeArgu*> ea;
+	string input = "ls #- a; echo hello && mkdir test || echo \"hello && goodbye\"; git status";
+	//getline(cin, input);
+	Rshellbase *base = new Rshellbase(input);
+	base->Disintegrate(ea, con, com);
+	ASSERT_EQ(con.size(), 5);
+	ASSERT_EQ(com.size(), 5);
+	ASSERT_EQ(ea.size(), 5);
+	EXPECT_EQ(con.at(0)->GetSign(), ';');
+	EXPECT_EQ(con.at(1)->GetSign(), '&');
+	EXPECT_EQ(con.at(2)->GetSign(), '|');
+	EXPECT_EQ(con.at(3)->GetSign(), ';');
+	EXPECT_EQ(con.at(4)->GetSign(), '.');
 }
 
 int main(int argc, char **argv) {
