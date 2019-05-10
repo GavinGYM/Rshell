@@ -1,11 +1,11 @@
 #!/bin/sh
 
-INPUTS = ("ls -a" "echo hello" "mkdir test" "echo world" "git status")
+INPUTS=("ls -a" "echo hello" "mkdir test" "echo world" "git status")
 
 for input in "${INPUTS[@]}"
 do
-    echo "./rshell ${input}"
-    output=$(./rshell ${input})
+    echo "../rshell ${input}"
+    output=$(../rshell ${input})
 	result=$(${input})
     echo "Output: \"${output}\""
     echo "Result: \"${result}\""
