@@ -17,9 +17,7 @@ bool ExeArgu::Operate()
 		exit(0);
 	}
 	else if (pid == 0) {
-		cout << "fork creates child process successfully!" << endl;
-		cout << "It's in child process!" << endl;
-		sleep(4);
+		//sleep(2);
 
 		char *argv[] = { const_cast<char*>(this->argu.c_str()),NULL };
 		char* path = const_cast<char*>(this->exe.c_str());
@@ -36,8 +34,6 @@ bool ExeArgu::Operate()
 	}
 	else {
 		waitpid(pid, NULL, 0);
-		cout << "child process releases successfully!" << endl;
-		cout << "It's in parent process!" << endl;
 	}
 	exit(0);
 }
