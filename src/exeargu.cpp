@@ -25,12 +25,13 @@ bool ExeArgu::Operate()
 		int a = execvp(path, argv);
 		if (a == -1) {
 			perror("execution fails!");
+			exit(0);
 			return false;
 		}
 		else {
+			exit(0);
 			return true;
 		}
-		exit(0);
 	}
 	else {
 		waitpid(pid, NULL, 0);
