@@ -14,10 +14,25 @@ int main() {
 		getline(cin, input);
 		Rshellbase *base = new Rshellbase(input);
 		base->Disintegrate(ea, con, com);
+		
+		bool next = true;
+		int i = 0;
+		while (next) {
+			if (ea.at(i)->getExe() == "exit") {
+				status = false;
+				break;
+			}
+			next = com.at(i)->Operate();
+			i++;
+		}
+		
 		/*
 		Run the execv, and continue when all work are done
 		status = ???;
 		*/
+		
+		//cout << con.at(0)->Operate(true);
+		//cout << true;
 	}
 	return 0;
 }
