@@ -21,8 +21,8 @@ bool ExeArgu::Operate()
 		cout << "It's in child process!" << endl;
 		sleep(4);
 
-		char *argv[] = { this->argu,NULL };
-		char* path = this->exe;
+		char *argv[] = { this->argu.c_str(),NULL };
+		char* path = this->exe.c_str();
 
 		int a = execvp(path, argv);
 		if (a == -1) {
