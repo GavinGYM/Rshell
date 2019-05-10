@@ -1,6 +1,6 @@
 #!/bin/sh
 
-INPUTS = ("ls -a" "echo hello" "mkdir test" "echo world" "git status")
+INPUTS=("ls -a" "echo hello" "mkdir test" "echo world" "git status")
 
 for input in "${INPUTS[@]}"
 do
