@@ -55,8 +55,13 @@ bool Rshellbase::Disintegrate(vector<ExeArgu*>& exeargu, vector<Connector*>& con
 			cmd = subinput.substr(0, pos);
 			subinput = subinput.substr(pos + 2, subinput.size() - pos - 1);
 		}
-		string argu = cmd.substr(cmd.find(" ") + 1, cmd.size() - 1);
-		
+		string argu;
+		if (cmd.find(" ") != string::npos) {
+			argu = cmd.substr(cmd.find(" ") + 1, cmd.size() - 1);
+		}
+		else {
+			argu = "";
+		}
 		//This is for the case we have a comment
 		if (argu.find("#") != string::npos) {
 			argu = argu.substr(0, argu.find("#"));
@@ -81,7 +86,13 @@ bool Rshellbase::Disintegrate(vector<ExeArgu*>& exeargu, vector<Connector*>& con
 	//this is for the last command which don't have a connector following it
 	string cmd;
 	cmd = subinput;
-	string argu = cmd.substr(cmd.find(" ") + 1, cmd.size() - 1);
+	string argu;
+	if (cmd.find(" ") != string::npos) {
+		argu = cmd.substr(cmd.find(" ") + 1, cmd.size() - 1);
+	}
+	else {
+		argu = "";
+	}
 	if (argu.find("#") != string::npos) {
 		argu = argu.substr(0, argu.find("#"));
 	}
