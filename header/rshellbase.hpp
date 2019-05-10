@@ -54,50 +54,6 @@ public:
 	char GetSign();
 };
 
-class Semicolon : public Connector {
-private:
-	char sign;
-public:
-	Semicolon() {}
-	Semicolon(char c) : sign(c) {}
-	~Semicolon() {
-	}
-	bool Operate(bool result);
-};
-
-class End : public Connector {
-private:
-	char sign;
-public:
-	End() {}
-	End(char c) : sign(c) {}
-	~End() {
-	}
-	bool Operate(bool result);
-};
-
-class Or : public Connector {
-private:
-	char sign;
-public:
-	Or() {}
-	Or(char c) : sign(c) {}
-	~Or() {
-	}
-	bool Operate(bool result);
-};
-
-class And : public Connector {
-private:
-	char sign;
-public:
-	And() {}
-	And(char c) : sign(c) {}
-	~And() {
-	}
-	bool Operate(bool result);
-};
-
 class Command : public Rshellbase {
 private:
 	ExeArgu *exeArgu;
