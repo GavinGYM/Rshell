@@ -17,25 +17,36 @@ bool ExeArgu::Operate()
 		exit(0);
 	}
 	else if (pid == 0) {
-		//sleep(2);
-
-		char *argv[] = { const_cast<char*>(this->exe.c_str()), const_cast<char*>(this->argu.c_str()),NULL };
-		char* path = const_cast<char*>(this->exe.c_str());
-	
-		int a = execvp(path, argv);
-		if (a == -1) {
-			perror("execution fails!");
-			return false;
+		if(this->argu == ""){
+			char *argv[] = { const_cast<char*>(this->exe.c_str()),NULL };
+			char* path = const_cast<char*>(this->exe.c_str());
+			int a = execvp(path, argv);
+			if (a == -1) {
+				perror("execution fails!");
+				return false;
+			}
+			else {
+				return true;
+			}
+			exit(0);	
 		}
-		else {
-			return true;
+		else{
+			char *argv[] = { const_cast<char*>(this->exe.c_str()), const_cast<char*>(this->argu.c_str()),NULL };
+			char* path = const_cast<char*>(this->exe.c_str());
+			int a = execvp(path, argv);
+			if (a == -1) {
+				perror("execution fails!");
+				return false;
+			}
+			else {
+				return true;
+			}
+			exit(0);
 		}
-		exit(0);
 	}
 	else {
 		waitpid(pid, NULL, 0);
 	}
-	//exit(0);
 }
 
 string ExeArgu::getExe()
