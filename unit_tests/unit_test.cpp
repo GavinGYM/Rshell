@@ -22,7 +22,7 @@ TEST(RshellBaseTest, DisintegrateTest_ExeArgu) {
 	EXPECT_EQ(ea.at(2)->getExe(), "mkdir");
 	EXPECT_EQ(ea.at(2)->getArgu(), "test");
 	EXPECT_EQ(ea.at(3)->getExe(), "echo");
-	EXPECT_EQ(ea.at(3)->getArgu(), "\"hello && goodbye\"");
+	EXPECT_EQ(ea.at(3)->getArgu(), "hello && goodbye");
 	EXPECT_EQ(ea.at(4)->getExe(), "git");
 	EXPECT_EQ(ea.at(4)->getArgu(), "status");
 }
