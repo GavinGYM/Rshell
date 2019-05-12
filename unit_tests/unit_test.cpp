@@ -45,6 +45,45 @@ TEST(RshellBaseTest, DisintegrateTest_Connector) {
 	EXPECT_EQ(con.at(4)->GetSign(), '.');
 }
 
+TEST(ConnectorTest, GetSignTest) {
+	vector<Connector*> con;
+	vector<Command*> com;
+	vector<ExeArgu*> ea;
+	string input = "ls #- a; echo hello && mkdir test || echo \"hello && goodbye\"; git status";
+	//getline(cin, input);
+	Rshellbase *base = new Rshellbase(input);
+	base->Disintegrate(ea, con, com);
+	ASSERT_EQ(con.size(), 5);
+	ASSERT_EQ(com.size(), 5);
+	ASSERT_EQ(ea.size(), 5);
+	EXPECT_EQ(con.at(0)->GetSign(), ';');
+	EXPECT_EQ(con.at(1)->GetSign(), '&');
+	EXPECT_EQ(con.at(2)->GetSign(), '|');
+	EXPECT_EQ(con.at(3)->GetSign(), ';');
+	EXPECT_EQ(con.at(4)->GetSign(), '.');
+}
+
+TEST(ConnectorTest, OperateTest) {
+	vector<Connector*> con;
+	vector<Command*> com;
+	vector<ExeArgu*> ea;
+	string input = "ls #- a; echo hello && mkdir test || echo \"hello && goodbye\"; git status";
+	//getline(cin, input);
+	Rshellbase *base = new Rshellbase(input);
+	base->Disintegrate(ea, con, com);
+	ASSERT_EQ(con.size(), 5);
+	ASSERT_EQ(com.size(), 5);
+	ASSERT_EQ(ea.size(), 5);
+	EXPECT_EQ(con.at(0)->Operate(true), true);
+	EXPECT_EQ(con.at(1)->GetSign(true), true);
+	EXPECT_EQ(con.at(1)->GetSign(false), false);
+	EXPECT_EQ(con.at(2)->GetSign(true), false);
+	EXPECT_EQ(con.at(2)->GetSign(false), true);
+	EXPECT_EQ(con.at(3)->GetSign(true), true);
+	EXPECT_EQ(con.at(4)->GetSign(true), false);
+	EXPECT_EQ(con.at(4)->GetSign(false), false);
+}
+
 int main(int argc, char **argv) {
 	::testing::InitGoogleTest(&argc, argv);
 	return RUN_ALL_TESTS();
