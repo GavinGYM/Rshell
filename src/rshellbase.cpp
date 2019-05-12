@@ -58,6 +58,9 @@ bool Rshellbase::Disintegrate(vector<ExeArgu*>& exeargu, vector<Connector*>& con
 		string argu;
 		if (cmd.find(" ") != string::npos) {
 			argu = cmd.substr(cmd.find(" ") + 1, cmd.size() - 1);
+			if (argu.at(0) == '\"'&&argu.at(argu.size() - 1) == '\"') {
+				argu = argu.substr(1, argu.size() - 2);
+			}
 		}
 		else {
 			argu = "";
@@ -89,6 +92,9 @@ bool Rshellbase::Disintegrate(vector<ExeArgu*>& exeargu, vector<Connector*>& con
 	string argu;
 	if (cmd.find(" ") != string::npos) {
 		argu = cmd.substr(cmd.find(" ") + 1, cmd.size() - 1);
+		if (argu.at(0) == '\"'&&argu.at(argu.size() - 1) == '\"') {
+			argu = argu.substr(1, argu.size() - 2);
+		}
 	}
 	else {
 		argu = "";
