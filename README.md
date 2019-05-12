@@ -98,7 +98,7 @@ First, we will use the fork() to create a child process, and use the waitpid() t
 2. && If the first commands fails, then the following command won’t be executed.
 3. || If the first commands successes, then the following command won’t be executed.
 # Development and Testing Roadmap
-1. - [ ] [Build Rshellbase class](https://github.com/cs100/spring-2019-assignment-yiming_and_yulin/issues/3)
+1. - [x] [Build Rshellbase class](https://github.com/cs100/spring-2019-assignment-yiming_and_yulin/issues/3)
 2. - [ ] [Unit test of Rshellbase class](https://github.com/cs100/spring-2019-assignment-yiming_and_yulin/issues/4)
 3. - [ ] [Bulid ExeArgu class](https://github.com/cs100/spring-2019-assignment-yiming_and_yulin/issues/5)
 4. - [ ] [Unit test of ExeArgu class](https://github.com/cs100/spring-2019-assignment-yiming_and_yulin/issues/6)
