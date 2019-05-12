@@ -75,13 +75,13 @@ TEST(ConnectorTest, OperateTest) {
 	ASSERT_EQ(com.size(), 5);
 	ASSERT_EQ(ea.size(), 5);
 	EXPECT_EQ(con.at(0)->Operate(true), true);
-	EXPECT_EQ(con.at(1)->GetSign(true), true);
-	EXPECT_EQ(con.at(1)->GetSign(false), false);
-	EXPECT_EQ(con.at(2)->GetSign(true), false);
-	EXPECT_EQ(con.at(2)->GetSign(false), true);
-	EXPECT_EQ(con.at(3)->GetSign(true), true);
-	EXPECT_EQ(con.at(4)->GetSign(true), false);
-	EXPECT_EQ(con.at(4)->GetSign(false), false);
+	EXPECT_EQ(con.at(1)->Operate(true), true);
+	EXPECT_EQ(con.at(1)->Operate(false), false);
+	EXPECT_EQ(con.at(2)->Operate(true), false);
+	EXPECT_EQ(con.at(2)->Operate(false), true);
+	EXPECT_EQ(con.at(3)->Operate(true), true);
+	EXPECT_EQ(con.at(4)->Operate(true), false);
+	EXPECT_EQ(con.at(4)->Operate(false), false);
 }
 
 int main(int argc, char **argv) {
