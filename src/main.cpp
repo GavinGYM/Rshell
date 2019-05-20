@@ -60,7 +60,7 @@ int main() {
 				}
 				next = com.at(i)->Operate();
 				i++;
-				if (next == false) {
+				if (next == false && com.at(i)->GetConnector()->GetSign() != '.') {
 					i++;
 				}
 			}
