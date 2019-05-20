@@ -89,6 +89,6 @@ void ExeArgu::setExe()
 void ExeArgu::setArgu()
 {
 	if (argu.at(argu.size() - 1) == ')') {
-		argu = argu.substr(0, argu.size() - 2);
+		argu = argu.substr(0, argu.size() - 1);
 	}
 }
