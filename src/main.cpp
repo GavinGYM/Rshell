@@ -25,10 +25,12 @@ int main() {
 				ea.at(j)->setLeftP(pl);
 				pl++;
 			}
-			if (ea.at(j)->getArgu().at(ea.at(j)->getArgu().size() - 1) == ')') {
-				ea.at(j)->setArgu();
-				ea.at(j)->setRightP(pl);
-				pr++;
+			if(ea.at(j)->getArgu()!=""){
+				if (ea.at(j)->getArgu().at(ea.at(j)->getArgu().size() - 1) == ')') {
+					ea.at(j)->setArgu();
+					ea.at(j)->setRightP(pl);
+					pr++;
+				}
 			}
 			j++;
 		}
@@ -37,10 +39,12 @@ int main() {
 			ea.at(j)->setLeftP(pl);
 			pl++;
 		}
-		if (ea.at(j)->getArgu().at(ea.at(j)->getArgu().size() - 1) == ')') {
-			ea.at(j)->setArgu();
-			ea.at(j)->setRightP(pl);
-			pr++;
+		if(ea.at(j)->getArgu()!=""){
+			if (ea.at(j)->getArgu().at(ea.at(j)->getArgu().size() - 1) == ')') {
+				ea.at(j)->setArgu();
+				ea.at(j)->setRightP(pl);
+				pr++;
+			}
 		}
 
 		bool parenStatus = true;
