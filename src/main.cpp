@@ -17,13 +17,16 @@ int main() {
 		
 		bool next = true;
 		int i = 0;
-		while (next) {
+		while (com.at(i)->connector->GetSign()!='.') {
 			if (ea.at(i)->getExe() == "exit") {
 				status = false;
 				break;
 			}
 			next = com.at(i)->Operate();
 			i++;
+			if(next == false){
+				i++;
+			}
 		}
 		
 		/*
