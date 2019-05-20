@@ -84,6 +84,9 @@ int main() {
 				next = com.at(i)->Operate();
 			}
 		}
+		con.clear();
+		com.clear();
+		ea.clear();
 	}
 	return 0;
 }
