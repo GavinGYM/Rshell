@@ -83,10 +83,12 @@ void ExeArgu::setExe()
 {
 	if(exe.at(0) == '('){
 		exe = exe.substr(1 , exe.size()-1);
+	}
 }
 
 void ExeArgu::setArgu()
 {
 	if(argu.at(argu.size()-1) == ')'){
 		exe = exe.substr(0 , exe.size()-2);
+	}
 }
