@@ -18,18 +18,31 @@ int main() {
 		//The precedence part
 		int pl = 0;
 		int pr = 0;
+		int i = 0;
 		while (com.at(i)->GetConnector()->GetSign()!='.') {
 			if (ea.at(i)->getExe().at(0) == '(') {
-				ea.setExe();
-				ea.setLeftP(pl);
+				ea.at(i)->setExe();
+				ea.at(i)->setLeftP(pl);
 				pl++;
 			}
 			if (ea.at(i)->getArgu().at(ea.at(i)->getArgu().size()-1) == ')') {
-				ea.setArgu();
-				ea.setRightP(pl);
+				ea.at(i)->setArgu();
+				ea.at(i)->setRightP(pl);
 				pr++;
-			}			
+			}
+			i++;
 		}
+		if (ea.at(i)->getExe().at(0) == '(') {
+			ea.at(i)->setExe();
+			ea.at(i)->setLeftP(pl);
+			pl++;
+		}
+		if (ea.at(i)->getArgu().at(ea.at(i)->getArgu().size()-1) == ')') {
+			ea.at(i)->setArgu();
+			ea.at(i)->setRightP(pl);
+			pr++;
+		}
+		
 		bool parenStatus = true;
 		if(pl!=pr){
 			cout << "Your parentheses are wrong, please try to type again.";
