@@ -76,7 +76,7 @@ int main() {
 					i++;
 				}
 			}
-			if(next){
+			if(next && status){
 				if (ea.at(i)->getExe() == "exit") {
 					status = false;
 					break;
