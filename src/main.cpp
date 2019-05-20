@@ -4,8 +4,8 @@
 using namespace std;
 
 int main() {
-	bool status=true;
-	while(status){
+	bool status = true;
+	while (status) {
 		vector<Connector*> con;
 		vector<Command*> com;
 		vector<ExeArgu*> ea;
@@ -14,53 +14,53 @@ int main() {
 		getline(cin, input);
 		Rshellbase *base = new Rshellbase(input);
 		base->Disintegrate(ea, con, com);
-		
+
 		//The precedence part
 		int pl = 0;
 		int pr = 0;
-		int i = 0;
-		while (com.at(i)->GetConnector()->GetSign()!='.') {
-			if (ea.at(i)->getExe().at(0) == '(') {
-				ea.at(i)->setExe();
-				ea.at(i)->setLeftP(pl);
+		int j = 0;
+		while (com.at(j)->GetConnector()->GetSign() != '.') {
+			if (ea.at(j)->getExe().at(0) == '(') {
+				ea.at(j)->setExe();
+				ea.at(j)->setLeftP(pl);
 				pl++;
 			}
-			if (ea.at(i)->getArgu().at(ea.at(i)->getArgu().size()-1) == ')') {
-				ea.at(i)->setArgu();
-				ea.at(i)->setRightP(pl);
+			if (ea.at(j)->getArgu().at(ea.at(j)->getArgu().size() - 1) == ')') {
+				ea.at(j)->setArgu();
+				ea.at(j)->setRightP(pl);
 				pr++;
 			}
-			i++;
+			j++;
 		}
-		if (ea.at(i)->getExe().at(0) == '(') {
-			ea.at(i)->setExe();
-			ea.at(i)->setLeftP(pl);
+		if (ea.at(j)->getExe().at(0) == '(') {
+			ea.at(j)->setExe();
+			ea.at(j)->setLeftP(pl);
 			pl++;
 		}
-		if (ea.at(i)->getArgu().at(ea.at(i)->getArgu().size()-1) == ')') {
-			ea.at(i)->setArgu();
-			ea.at(i)->setRightP(pl);
+		if (ea.at(j)->getArgu().at(ea.at(j)->getArgu().size() - 1) == ')') {
+			ea.at(j)->setArgu();
+			ea.at(j)->setRightP(pl);
 			pr++;
 		}
-		
+
 		bool parenStatus = true;
-		if(pl!=pr){
-			cout << "Your parentheses are wrong, please try to type again." <<endl;
+		if (pl != pr) {
+			cout << "Your parentheses are wrong, please try to type again." << endl;
 			parenStatus = false;
 		}
-		
-		if(parenStatus){
+
+		if (parenStatus) {
 			//The execute part
 			bool next = true;
 			int i = 0;
-			while (com.at(i)->GetConnector()->GetSign()!='.') {
+			while (com.at(i)->GetConnector()->GetSign() != '.') {
 				if (ea.at(i)->getExe() == "exit") {
 					status = false;
 					break;
 				}
 				next = com.at(i)->Operate();
 				i++;
-				if(next == false){
+				if (next == false) {
 					i++;
 				}
 			}
@@ -70,7 +70,7 @@ int main() {
 			}
 			next = com.at(i)->Operate();
 			i++;
-			if(next == false){
+			if (next == false) {
 				i++;
 			}
 			/*
