@@ -68,3 +68,25 @@ int ExeArgu::getRightP()
 {
 	return this->rightP;
 }
+
+void ExeArgu::setLeftP(int i)
+{
+	this->leftP = i;
+}
+
+void ExeArgu::setRightP(int i)
+{
+	this->rightP = i;
+}
+
+void ExeArgu::setExe()
+{
+	if(exe.at(0) == '('){
+		exe = exe.substr(1 , exe.size()-1);
+}
+
+void ExeArgu::setArgu()
+{
+	if(argu.at(argu.size()-1) == ')'){
+		exe = exe.substr(0 , exe.size()-2);
+}
