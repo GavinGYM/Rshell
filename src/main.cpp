@@ -70,9 +70,6 @@ int main() {
 			}
 			next = com.at(i)->Operate();
 			i++;
-			if (next == false) {
-				i++;
-			}
 			/*
 			Run the execv, and continue when all work are done
 			status = ???;
