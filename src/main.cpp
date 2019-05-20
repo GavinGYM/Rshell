@@ -85,8 +85,11 @@ int main() {
 			}
 		}
 		con.clear();
+		vector<Connector*>(con).swap(con);
 		com.clear();
+		vector<Command*>(com).swap(com);
 		ea.clear();
+		vector<ExeArgu*>(ea).swap(ea);
 	}
 	return 0;
 }
