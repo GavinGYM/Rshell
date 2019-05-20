@@ -44,6 +44,8 @@ public:
 	string getArgu();
 	int getLeftP();
 	int getRightP();
+	void setLeftP();
+	void setRightP();
 };
 
 class Connector : public Rshellbase {
