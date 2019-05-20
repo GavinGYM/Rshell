@@ -54,29 +54,31 @@ int main() {
 			bool next = true;
 			int i = 0;
 			while (com.at(i)->GetConnector()->GetSign() != '.') {
+				if(next){
+					if (ea.at(i)->getExe() == "exit") {
+						status = false;
+						break;
+					}
+					next = com.at(i)->Operate();
+					i++;
+				}
+				else{
+					if(com.at(i)->GetConnector()->GetSign() == '|' && com.at(i-1)->GetConnector()->GetSign() == '&'){
+						next = true;	
+					}
+					if(com.at(i)->GetConnector()->GetSign() == '&' && com.at(i-1)->GetConnector()->GetSign() == '|'){
+						next = true;	
+					}
+					i++;
+				}
+			}
+			if(next){
 				if (ea.at(i)->getExe() == "exit") {
 					status = false;
 					break;
 				}
 				next = com.at(i)->Operate();
-				i++;
-				if (next == false && com.at(i)->GetConnector()->GetSign() != '.') {
-					i++;
-				}
 			}
-			if (ea.at(i)->getExe() == "exit") {
-				status = false;
-				break;
-			}
-			next = com.at(i)->Operate();
-			i++;
-			/*
-			Run the execv, and continue when all work are done
-			status = ???;
-			*/
-
-			//cout << con.at(0)->Operate(true);
-			//cout << true;
 		}
 	}
 	return 0;
