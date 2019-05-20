@@ -65,4 +65,7 @@ public:
 		delete &this->connector;
 	}
 	bool Operate();
+	Connector * GetConnector(){
+		return this->connector;
+	}
 };
