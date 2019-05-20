@@ -56,10 +56,15 @@ bool Rshellbase::Disintegrate(vector<ExeArgu*>& exeargu, vector<Connector*>& con
 			subinput = subinput.substr(pos + 2, subinput.size() - pos - 1);
 		}
 		string argu;
+		string exe;
 		if (cmd.find(" ") != string::npos) {
 			argu = cmd.substr(cmd.find(" ") + 1, cmd.size() - 1);
 			if (argu.at(0) == '\"'&&argu.at(argu.size() - 1) == '\"') {
 				argu = argu.substr(1, argu.size() - 2);
+			}
+			else if(argu.at(0) == '\"'&&argu.at(argu.size() - 2) == '\"'&&argu.at(argu.size() - 1) ==')'){
+				argu = argu.substr(1, argu.size() - 3);
+				argu.append(")");
 			}
 		}
 		else {
@@ -69,8 +74,9 @@ bool Rshellbase::Disintegrate(vector<ExeArgu*>& exeargu, vector<Connector*>& con
 		if (argu.find("#") != string::npos) {
 			argu = argu.substr(0, argu.find("#"));
 		}
-
-		ExeArgu *newea = new ExeArgu(cmd.substr(0, cmd.find(" ")), argu);
+		string exe = cmd.substr(0, cmd.find(" "));
+		
+		ExeArgu *newea = new ExeArgu(exe, argu);
 		exeargu.push_back(newea);
 		//exeargu[i]->exe = cmd.substr(0,cmd.find(" "));
 		//exeargu[i]->argu = cmd.substr(cmd.find(" ")+1,cmd.size()-1);
@@ -90,10 +96,15 @@ bool Rshellbase::Disintegrate(vector<ExeArgu*>& exeargu, vector<Connector*>& con
 	string cmd;
 	cmd = subinput;
 	string argu;
+	string exe;
 	if (cmd.find(" ") != string::npos) {
 		argu = cmd.substr(cmd.find(" ") + 1, cmd.size() - 1);
 		if (argu.at(0) == '\"'&&argu.at(argu.size() - 1) == '\"') {
 			argu = argu.substr(1, argu.size() - 2);
+		}
+		else if(argu.at(0) == '\"'&&argu.at(argu.size() - 2) == '\"'&&argu.at(argu.size() - 1) ==')'){
+			argu = argu.substr(1, argu.size() - 3);
+			argu.append(")");
 		}
 	}
 	else {
@@ -102,7 +113,9 @@ bool Rshellbase::Disintegrate(vector<ExeArgu*>& exeargu, vector<Connector*>& con
 	if (argu.find("#") != string::npos) {
 		argu = argu.substr(0, argu.find("#"));
 	}
-	ExeArgu *newea = new ExeArgu(cmd.substr(0, cmd.find(" ")), argu);
+	exe = cmd.substr(0, cmd.find(" "));
+	
+	ExeArgu *newea = new ExeArgu(exe, argu);
 	exeargu.push_back(newea);
 	Connector *newcon = new Connector('.');
 	connector.push_back(newcon);
