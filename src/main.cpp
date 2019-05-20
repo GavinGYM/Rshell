@@ -17,7 +17,7 @@ int main() {
 		
 		bool next = true;
 		int i = 0;
-		while (com.at(i)->connector->GetSign()!='.') {
+		while (com.at(i)->GetConnector()->GetSign()!='.') {
 			if (ea.at(i)->getExe() == "exit") {
 				status = false;
 				break;
