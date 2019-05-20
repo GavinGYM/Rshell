@@ -74,7 +74,7 @@ bool Rshellbase::Disintegrate(vector<ExeArgu*>& exeargu, vector<Connector*>& con
 		if (argu.find("#") != string::npos) {
 			argu = argu.substr(0, argu.find("#"));
 		}
-		string exe = cmd.substr(0, cmd.find(" "));
+		exe = cmd.substr(0, cmd.find(" "));
 		
 		ExeArgu *newea = new ExeArgu(exe, argu);
 		exeargu.push_back(newea);
