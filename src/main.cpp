@@ -28,7 +28,15 @@ int main() {
 				i++;
 			}
 		}
-		
+		if (ea.at(i)->getExe() == "exit") {
+			status = false;
+			break;
+		}
+		next = com.at(i)->Operate();
+		i++;
+		if(next == false){
+			i++;
+		}
 		/*
 		Run the execv, and continue when all work are done
 		status = ???;
