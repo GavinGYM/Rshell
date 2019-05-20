@@ -45,7 +45,7 @@ int main() {
 		
 		bool parenStatus = true;
 		if(pl!=pr){
-			cout << "Your parentheses are wrong, please try to type again.";
+			cout << "Your parentheses are wrong, please try to type again." <<endl;
 			parenStatus = false;
 		}
 		
