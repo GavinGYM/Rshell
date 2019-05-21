@@ -82,6 +82,7 @@ int main() {
 			if(next){
 				if (ea.at(i)->getExe() == "exit") {
 					status = false;
+					cout << "get to the outside" << endl;
 					return 0;
 				}
 				else{
