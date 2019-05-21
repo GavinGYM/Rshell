@@ -50,6 +50,7 @@ bool ExeArgu::Operate()
 		if(pr == pid){
 			if(status == true){	
 				cout << "get here and return true" << endl;
+				cout << WEXITSTATUS(status);
 				return true;
 			}
 			else{
