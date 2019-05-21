@@ -3,6 +3,15 @@
 #include <iostream>
 using namespace std;
 
+void clearVectorContents( vector <Command*> & a ) 
+{    
+    for ( int i = 0; i < a.size(); i++ ) 
+    {       
+        delete a[i];    
+    }    
+    a.clear(); 
+} 
+
 int main() {
 	bool status = true;
 	while (status) {
@@ -62,6 +71,7 @@ int main() {
 					if (ea.at(i)->getExe() == "exit") {
 						status = false;
 						cout << "get here in while" << endl;
+						clearVectorContents( com );
 						return 0;
 					}
 					else{
@@ -83,6 +93,7 @@ int main() {
 				if (ea.at(i)->getExe() == "exit") {
 					status = false;
 					cout << "get to the outside" << endl;
+					clearVectorContents( com );
 					return 0;
 				}
 				else{
