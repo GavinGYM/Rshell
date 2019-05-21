@@ -55,6 +55,7 @@ bool ExeArgu::Operate()
 			}
 			else{
 				cout << "get here and return false" << endl;
+				cout << WEXITSTATUS(status);
 				return false;
 			}
 		}
