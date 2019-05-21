@@ -9,7 +9,7 @@ using namespace std;
 
 bool ExeArgu::Operate()
 {
-	pid_t pid;
+	pid_t pid,pr;
 	pid = fork();
 
 	if (pid < 0) {
