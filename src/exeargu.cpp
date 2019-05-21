@@ -23,9 +23,9 @@ bool ExeArgu::Operate()
 			int a = execvp(path, argv);
 			if (a == -1) {
 				perror("execution fails!");
-				exit(1);
-cout << "can return false" << endl;
 				return false;
+cout << "can return false" << endl;
+				exit(1);				
 			}
 			else {
 				exit(0);
@@ -38,9 +38,9 @@ cout << "can return false" << endl;
 			int a = execvp(path, argv);
 			if (a == -1) {
 				perror("execution fails!");
-				exit(1);
-cout << "can return false" << endl;
 				return false;
+cout << "can return false" << endl;
+				exit(1);	
 			}
 			else {
 				exit(0);
