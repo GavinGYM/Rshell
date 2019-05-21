@@ -84,10 +84,15 @@ int main() {
 				next = com.at(i)->Operate();
 			}
 		}
-		
-		vector <Connector*>().swap(con);
-		vector<Command*>().swap(com);
-		vector<ExeArgu*>().swap(ea);
+		for(int k=0 ; k<con.size() ; k++){
+			delete con[k];
+		}
+		for(int k=0 ; k<com.size() ; k++){
+			delete com[k];
+		}
+		for(int k=0 ; k<ea.size() ; k++){
+			delete ea[k];
+		}
 	}
 	return 0;
 }
