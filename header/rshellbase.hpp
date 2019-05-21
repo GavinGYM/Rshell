@@ -31,6 +31,8 @@ class ExeArgu : public Rshellbase {
 private:
 	string exe;
 	string argu;
+	int leftP = -1;
+	int rightP = -1;
 public:
 	ExeArgu(string e, string a) : exe(e), argu(a) {}
 	~ExeArgu() {
@@ -40,6 +42,12 @@ public:
 	bool Operate();
 	string getExe();
 	string getArgu();
+	int getLeftP();
+	int getRightP();
+	void setLeftP(int i);
+	void setRightP(int i);
+	void setExe();
+	void setArgu();
 };
 
 class Connector : public Rshellbase {

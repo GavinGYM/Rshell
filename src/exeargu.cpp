@@ -9,7 +9,7 @@ using namespace std;
 
 bool ExeArgu::Operate()
 {
-	pid_t pid;
+	pid_t pid,pr;
 	pid = fork();
 
 	if (pid < 0) {
@@ -23,12 +23,10 @@ bool ExeArgu::Operate()
 			int a = execvp(path, argv);
 			if (a == -1) {
 				perror("execution fails!");
-				exit(1);
-				return false;
+				exit(1);				
 			}
 			else {
 				exit(0);
-				return true;
 			}	
 		}
 		else{
@@ -37,17 +35,29 @@ bool ExeArgu::Operate()
 			int a = execvp(path, argv);
 			if (a == -1) {
 				perror("execution fails!");
-				exit(1);
-				return false;
+				exit(1);	
 			}
 			else {
 				exit(0);
-				return true;
 			}
 		}
 	}
 	else {
-		waitpid(pid, NULL, 0);
+		int status;
+		pr = waitpid(pid, &status, 0);
+		if(pr == pid){
+			status = WEXITSTATUS(status);
+			if(status == 1){
+				return false;
+			}
+			else if(status == 0) {
+				return true;
+			}
+		}
+		else{
+			cout << "someerror occured" << endl;
+			return false;
+		}
 	}
 }
 
@@ -59,4 +69,38 @@ string ExeArgu::getExe()
 string ExeArgu::getArgu()
 {
 	return this->argu;
+}
+
+int ExeArgu::getLeftP()
+{
+	return this->leftP;
+}
+
+int ExeArgu::getRightP()
+{
+	return this->rightP;
+}
+
+void ExeArgu::setLeftP(int i)
+{
+	this->leftP = i;
+}
+
+void ExeArgu::setRightP(int i)
+{
+	this->rightP = i;
+}
+
+void ExeArgu::setExe()
+{
+	if(exe.at(0) == '('){
+		exe = exe.substr(1 , exe.size()-1);
+	}
+}
+
+void ExeArgu::setArgu()
+{
+	if (argu.at(argu.size() - 1) == ')') {
+		argu = argu.substr(0, argu.size() - 1);
+	}
 }

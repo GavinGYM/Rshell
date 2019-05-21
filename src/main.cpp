@@ -4,8 +4,8 @@
 using namespace std;
 
 int main() {
-	bool status=true;
-	while(status){
+	bool status = true;
+	while (status) {
 		vector<Connector*> con;
 		vector<Command*> com;
 		vector<ExeArgu*> ea;
@@ -14,36 +14,86 @@ int main() {
 		getline(cin, input);
 		Rshellbase *base = new Rshellbase(input);
 		base->Disintegrate(ea, con, com);
-		
-		bool next = true;
-		int i = 0;
-		while (com.at(i)->GetConnector()->GetSign()!='.') {
-			if (ea.at(i)->getExe() == "exit") {
-				status = false;
-				break;
+
+		//The precedence part
+		int pl = 0;
+		int pr = 0;
+		int j = 0;
+		while (com.at(j)->GetConnector()->GetSign() != '.') {
+			if (ea.at(j)->getExe().at(0) == '(') {
+				ea.at(j)->setExe();
+				ea.at(j)->setLeftP(pl);
+				pl++;
 			}
-			next = com.at(i)->Operate();
-			i++;
-			if(next == false){
-				i++;
+			if(ea.at(j)->getArgu()!=""){
+				if (ea.at(j)->getArgu().at(ea.at(j)->getArgu().size() - 1) == ')') {
+					ea.at(j)->setArgu();
+					ea.at(j)->setRightP(pl);
+					pr++;
+				}
+			}
+			j++;
+		}
+		if (ea.at(j)->getExe().at(0) == '(') {
+			ea.at(j)->setExe();
+			ea.at(j)->setLeftP(pl);
+			pl++;
+		}
+		if(ea.at(j)->getArgu()!=""){
+			if (ea.at(j)->getArgu().at(ea.at(j)->getArgu().size() - 1) == ')') {
+				ea.at(j)->setArgu();
+				ea.at(j)->setRightP(pl);
+				pr++;
 			}
 		}
-		if (ea.at(i)->getExe() == "exit") {
-			status = false;
-			break;
+
+		bool parenStatus = true;
+		if (pl != pr) {
+			cout << "Your parentheses are wrong, please try to type again." << endl;
+			parenStatus = false;
 		}
-		next = com.at(i)->Operate();
-		i++;
-		if(next == false){
-			i++;
+
+		if (parenStatus) {
+			//The execute part
+			bool next = true;
+			int i = 0;
+			while (com.at(i)->GetConnector()->GetSign() != '.') {
+				if(next){
+					if (ea.at(i)->getExe() == "exit") {
+						status = false;
+						break;
+						//cout << "get here in while" << endl;
+						//return 0;
+					}
+					else{
+						next = com.at(i)->Operate();
+						i++;
+					}
+				}
+				else{
+					if(com.at(i)->GetConnector()->GetSign() == '|' && com.at(i-1)->GetConnector()->GetSign() == '&'){
+						next = true;	
+					}
+					if(com.at(i)->GetConnector()->GetSign() == '&' && com.at(i-1)->GetConnector()->GetSign() == '|'){
+						next = true;	
+					}
+					i++;
+				}
+			}
+			if(next){
+				if (ea.at(i)->getExe() == "exit") {
+					status = false;
+					//cout << "get to the outside" << endl;
+					//return 0;
+				}
+				else{
+					next = com.at(i)->Operate();
+					i++;
+				}
+			}
 		}
-		/*
-		Run the execv, and continue when all work are done
-		status = ???;
-		*/
-		
-		//cout << con.at(0)->Operate(true);
-		//cout << true;
 	}
+	exit(0);
+	cout << " the end"<<endl;
 	return 0;
 }
