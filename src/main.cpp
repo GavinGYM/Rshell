@@ -84,12 +84,10 @@ int main() {
 				next = com.at(i)->Operate();
 			}
 		}
-		con.clear();
-		vector<Connector*>(con).swap(con);
-		com.clear();
-		vector<Command*>(com).swap(com);
-		ea.clear();
-		vector<ExeArgu*>(ea).swap(ea);
+		
+		vector <Connector*>().swap(con);
+		vector<Command*>().swap(com);
+		vector<ExeArgu*>().swap(ea);
 	}
 	return 0;
 }
