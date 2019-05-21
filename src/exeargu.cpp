@@ -23,12 +23,13 @@ bool ExeArgu::Operate()
 			int a = execvp(path, argv);
 			if (a == -1) {
 				perror("execution fails!");
+				exit(1);
 				return false;
 			}
 			else {
+				exit(0);
 				return true;
-			}
-			exit(0);	
+			}	
 		}
 		else{
 			char *argv[] = { const_cast<char*>(this->exe.c_str()), const_cast<char*>(this->argu.c_str()),NULL };
@@ -36,12 +37,13 @@ bool ExeArgu::Operate()
 			int a = execvp(path, argv);
 			if (a == -1) {
 				perror("execution fails!");
+				exit(1);
 				return false;
 			}
 			else {
+				exit(0);
 				return true;
 			}
-			exit(0);
 		}
 	}
 	else {
