@@ -93,6 +93,7 @@ int main() {
 			}
 		}
 	}
+	exit(0);
 	cout << " the end"<<endl;
 	return 0;
 }
