@@ -23,12 +23,10 @@ bool ExeArgu::Operate()
 			int a = execvp(path, argv);
 			if (a == -1) {
 				perror("execution fails!");
-				return false;
 				exit(1);				
 			}
 			else {
 				exit(0);
-				return true;
 			}	
 		}
 		else{
@@ -37,17 +35,23 @@ bool ExeArgu::Operate()
 			int a = execvp(path, argv);
 			if (a == -1) {
 				perror("execution fails!");
-				return false;
 				exit(1);	
 			}
 			else {
 				exit(0);
-				return true;
 			}
 		}
 	}
 	else {
-		waitpid(pid, NULL, 0);
+		pr = waitpid(pid, NULL, 0);
+		if(pr == pid){
+			cout << "get here and return true" << endl;
+			return true;
+		}
+		else{
+			cout << "get here and return false" << endl;
+			return false;
+		}
 	}
 }
 
