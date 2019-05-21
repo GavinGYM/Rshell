@@ -62,7 +62,7 @@ int main() {
 					if (ea.at(i)->getExe() == "exit") {
 						status = false;
 						cout << "get here in while" << endl;
-						exit(0);
+						return 0;
 					}
 					next = com.at(i)->Operate();
 					i++;
@@ -80,7 +80,7 @@ int main() {
 			if(next){
 				if (ea.at(i)->getExe() == "exit") {
 					status = false;
-					exit(0);
+					return 0;
 				}
 				next = com.at(i)->Operate();
 			}
