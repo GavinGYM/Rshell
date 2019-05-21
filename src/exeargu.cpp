@@ -11,6 +11,7 @@ bool ExeArgu::Operate()
 {
 	pid_t pid,pr;
 	pid = fork();
+	bool status = false;
 
 	if (pid < 0) {
 		perror("fork creates child process error!");
@@ -26,6 +27,7 @@ bool ExeArgu::Operate()
 				exit(1);				
 			}
 			else {
+				status = true;
 				exit(0);
 			}	
 		}
@@ -38,6 +40,7 @@ bool ExeArgu::Operate()
 				exit(1);	
 			}
 			else {
+				status = true;
 				exit(0);
 			}
 		}
@@ -45,11 +48,17 @@ bool ExeArgu::Operate()
 	else {
 		pr = waitpid(pid, NULL, 0);
 		if(pr == pid){
-			cout << "get here and return true" << endl;
-			return true;
+			if(status == true){	
+				cout << "get here and return true" << endl;
+				return true;
+			}
+			else{
+				cout << "get here and return true" << endl;
+				return true;
+			}
 		}
 		else{
-			cout << "get here and return false" << endl;
+			cout << "someerror occured" << endl;
 			return false;
 		}
 	}
