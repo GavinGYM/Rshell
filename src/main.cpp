@@ -64,8 +64,10 @@ int main() {
 						cout << "get here in while" << endl;
 						return 0;
 					}
-					next = com.at(i)->Operate();
-					i++;
+					else{
+						next = com.at(i)->Operate();
+						i++;
+					}
 				}
 				else{
 					if(com.at(i)->GetConnector()->GetSign() == '|' && com.at(i-1)->GetConnector()->GetSign() == '&'){
@@ -82,7 +84,10 @@ int main() {
 					status = false;
 					return 0;
 				}
-				next = com.at(i)->Operate();
+				else{
+					next = com.at(i)->Operate();
+					i++;
+				}
 			}
 		}
 	}
