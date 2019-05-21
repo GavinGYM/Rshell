@@ -43,7 +43,8 @@ bool ExeArgu::Operate()
 		}
 	}
 	else {
-		pr = waitpid(pid, NULL, 0);
+		int status;
+		pr = waitpid(pid, &status, 0);
 		if(pr == pid){
 				cout << "get here and return true" << endl;
 				cout << WEXITSTATUS(status);
