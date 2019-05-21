@@ -82,6 +82,7 @@ int main() {
 					status = false;
 					cout << "get here out while" << endl;
 					return 0;
+					cout << "return doesn't work" << endl;
 				}
 				next = com.at(i)->Operate();
 			}
