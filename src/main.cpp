@@ -81,8 +81,7 @@ int main() {
 				if (ea.at(i)->getExe() == "exit") {
 					status = false;
 					cout << "get here out while" << endl;
-					return 0;
-					cout << "return doesn't work" << endl;
+					break;
 				}
 				next = com.at(i)->Operate();
 			}
