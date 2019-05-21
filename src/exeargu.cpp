@@ -24,7 +24,6 @@ bool ExeArgu::Operate()
 			if (a == -1) {
 				perror("execution fails!");
 				return false;
-cout << "can return false" << endl;
 				exit(1);				
 			}
 			else {
@@ -39,7 +38,6 @@ cout << "can return false" << endl;
 			if (a == -1) {
 				perror("execution fails!");
 				return false;
-cout << "can return false" << endl;
 				exit(1);	
 			}
 			else {
