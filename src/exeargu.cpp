@@ -49,7 +49,6 @@ bool ExeArgu::Operate()
 				cout << "get here and return true" << endl;
 				cout << WEXITSTATUS(status);
 				return true;
-			}
 		}
 		else{
 			cout << "someerror occured" << endl;
