@@ -1,7 +1,3 @@
-
-//#include "connector.h"
-//#include "exeargu.h"
-//#include "command.h"
 #include <string>
 #include <vector>
 #include <climits>
@@ -31,8 +27,8 @@ class ExeArgu : public Rshellbase {
 private:
 	string exe;
 	string argu;
-	int leftP = -1;
-	int rightP = -1;
+	vector<int> leftP;
+	vector<int> rightP;
 public:
 	ExeArgu(string e, string a) : exe(e), argu(a) {}
 	~ExeArgu() {
