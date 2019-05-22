@@ -71,12 +71,12 @@ string ExeArgu::getArgu()
 	return this->argu;
 }
 
-int ExeArgu::getLeftP()
+vector<int> ExeArgu::getLeftP()
 {
 	return this->leftP;
 }
 
-int ExeArgu::getRightP()
+vector<int> ExeArgu::getRightP()
 {
 	return this->rightP;
 }
