@@ -16,33 +16,50 @@ int main() {
 		base->Disintegrate(ea, con, com);
 
 		//The precedence part
+		int cnt = 0;
 		int pl = 0;
 		int pr = 0;
 		int j = 0;
 		while (com.at(j)->GetConnector()->GetSign() != '.') {
-			if (ea.at(j)->getExe().at(0) == '(') {
+			while(ea.at(j)->getExe().at(0) == '(') {
 				ea.at(j)->setExe();
-				ea.at(j)->setLeftP(pl);
+				ea.at(j)->setLeftP(cnt);
+				cnt++;
 				pl++;
 			}
+			while(ea.at(j)->getExe().at(ea.at(j)->getExe().size() - 1) == ')') {
+				ea.at(j)->setArgu();
+				cnt--;
+				ea.at(j)->setRightP(cnt);
+				pr++;
+			}
 			if(ea.at(j)->getArgu()!=""){
-				if (ea.at(j)->getArgu().at(ea.at(j)->getArgu().size() - 1) == ')') {
+				while(ea.at(j)->getArgu().at(ea.at(j)->getArgu().size() - 1) == ')') {
 					ea.at(j)->setArgu();
-					ea.at(j)->setRightP(pl);
+					cnt--;
+					ea.at(j)->setRightP(cnt);
 					pr++;
 				}
 			}
 			j++;
 		}
-		if (ea.at(j)->getExe().at(0) == '(') {
+		while(ea.at(j)->getExe().at(0) == '(') {
 			ea.at(j)->setExe();
-			ea.at(j)->setLeftP(pl);
+			ea.at(j)->setLeftP(cnt);
+			cnt++;
 			pl++;
 		}
+		while(ea.at(j)->getExe().at(ea.at(j)->getExe().size() - 1) == ')') {
+			ea.at(j)->setArgu();
+			cnt--;
+			ea.at(j)->setRightP(cnt);
+			pr++;
+		}
 		if(ea.at(j)->getArgu()!=""){
-			if (ea.at(j)->getArgu().at(ea.at(j)->getArgu().size() - 1) == ')') {
+			while(ea.at(j)->getArgu().at(ea.at(j)->getArgu().size() - 1) == ')') {
 				ea.at(j)->setArgu();
-				ea.at(j)->setRightP(pl);
+				cnt--;
+				ea.at(j)->setRightP(cnt);
 				pr++;
 			}
 		}
