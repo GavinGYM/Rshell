@@ -83,12 +83,12 @@ int ExeArgu::getRightP()
 
 void ExeArgu::setLeftP(int i)
 {
-	this->leftP = i;
+	leftP.push_back(i);
 }
 
 void ExeArgu::setRightP(int i)
 {
-	this->rightP = i;
+	rightP.push_back(i);
 }
 
 void ExeArgu::setExe()
