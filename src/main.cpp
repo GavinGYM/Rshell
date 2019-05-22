@@ -88,13 +88,53 @@ int main() {
 					}
 				}
 				else{
-					if(com.at(i)->GetConnector()->GetSign() == '|' && com.at(i-1)->GetConnector()->GetSign() == '&'){
-						next = true;	
+					if(ea.at(i)->getLeftP().size() == 0){
+						if(com.at(i)->GetConnector()->GetSign() == '|' && com.at(i-1)->GetConnector()->GetSign() == '&'){
+							next = true;	
+						}
+						if(com.at(i)->GetConnector()->GetSign() == '&' && com.at(i-1)->GetConnector()->GetSign() == '|'){
+							next = true;	
+						}
+						if(com.at(i)->GetConnector()->GetSign() == ';' && com.at(i-1)->GetConnector()->GetSign() == '|'){
+							next = true;	
+						}
+						if(com.at(i)->GetConnector()->GetSign() == ';' && com.at(i-1)->GetConnector()->GetSign() == '&'){
+							next = true;	
+						}
+						i++;
 					}
-					if(com.at(i)->GetConnector()->GetSign() == '&' && com.at(i-1)->GetConnector()->GetSign() == '|'){
-						next = true;	
+					else{
+						char firstCon = com.at(i-1)->GetConnector()->GetSign();
+						int flag = ea.at(i)->getLeftP().at(0);
+						bool found = false;
+						while(!found){
+							for(int p=0; p<ea.at(i)->getRightP().size(); p++){
+								if(ea.at(i)->getRightP().at(p) == flag){
+									found = true;
+									break;
+								}
+							}
+							if(!found){i++;}
+						}
+						char secondCon = com.at(i)->GetConnector()->GetSign();
+						if(firstCon == '|' && secondCon == '&'){
+							next = true;	
+						}
+						if(firstCon == '&' && secondCon == '|'){
+							next = true;	
+						}
+						if(firstCon == '&' && secondCon == ';'){
+							next = true;	
+						}
+						if(firstCon == '|' && secondCon == ';'){
+							next = true;	
+						}
+						i++;
+						if(secondCon == '.'){
+							next = false;
+							i--;
+						}
 					}
-					i++;
 				}
 			}
 			if(next){
