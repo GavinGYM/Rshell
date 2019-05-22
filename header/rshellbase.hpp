@@ -36,7 +36,8 @@ public:
 		delete &this->argu;
 	}
 	bool Operate();
-	string getExe();
+	string getExeL();
+	string getExeR();
 	string getArgu();
 	vector<int> getLeftP();
 	vector<int> getRightP();
