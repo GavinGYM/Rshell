@@ -22,13 +22,13 @@ int main() {
 		int j = 0;
 		while (com.at(j)->GetConnector()->GetSign() != '.') {
 			while(ea.at(j)->getExe().at(0) == '(') {
-				ea.at(j)->setExe();
+				ea.at(j)->setExeL();
 				ea.at(j)->setLeftP(cnt);
 				cnt++;
 				pl++;
 			}
 			while(ea.at(j)->getExe().at(ea.at(j)->getExe().size() - 1) == ')') {
-				ea.at(j)->setArgu();
+				ea.at(j)->setExeR();
 				cnt--;
 				ea.at(j)->setRightP(cnt);
 				pr++;
@@ -44,13 +44,13 @@ int main() {
 			j++;
 		}
 		while(ea.at(j)->getExe().at(0) == '(') {
-			ea.at(j)->setExe();
+			ea.at(j)->setExeL();
 			ea.at(j)->setLeftP(cnt);
 			cnt++;
 			pl++;
 		}
 		while(ea.at(j)->getExe().at(ea.at(j)->getExe().size() - 1) == ')') {
-			ea.at(j)->setArgu();
+			ea.at(j)->setExeR();
 			cnt--;
 			ea.at(j)->setRightP(cnt);
 			pr++;
