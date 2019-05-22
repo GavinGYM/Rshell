@@ -91,10 +91,17 @@ void ExeArgu::setRightP(int i)
 	rightP.push_back(i);
 }
 
-void ExeArgu::setExe()
+void ExeArgu::setExeL()
 {
 	if(exe.at(0) == '('){
 		exe = exe.substr(1 , exe.size()-1);
+	}
+}
+
+void ExeArgu::setExeR()
+{
+	if (exe.at(exe.size() - 1) == ')') {
+		exe = exe.substr(0, exe.size() - 1);
 	}
 }
 
