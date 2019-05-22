@@ -38,8 +38,8 @@ public:
 	bool Operate();
 	string getExe();
 	string getArgu();
-	int getLeftP();
-	int getRightP();
+	vector<int> getLeftP();
+	vector<int> getRightP();
 	void setLeftP(int i);
 	void setRightP(int i);
 	void setExe();
