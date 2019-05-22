@@ -36,14 +36,14 @@ public:
 		delete &this->argu;
 	}
 	bool Operate();
-	string getExeL();
-	string getExeR();
+	string getExe();
 	string getArgu();
 	vector<int> getLeftP();
 	vector<int> getRightP();
 	void setLeftP(int i);
 	void setRightP(int i);
-	void setExe();
+	void setExeL();
+	void setExeR();
 	void setArgu();
 };
 
