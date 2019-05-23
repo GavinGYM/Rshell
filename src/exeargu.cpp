@@ -11,6 +11,26 @@ using namespace std;
 
 bool ExeArgu::Operate()
 { 
+	if(this->exe == "["){
+		this->exe = "test";
+		if(this->argu.at(this->argu.size() - 1) == ']' && this->argu.at(this->argu.size() - 2) == ' '){
+			this->argu = this->argu.substr(0,this->argu.size() - 3);
+		}
+		else if( this->argu.at(this->argu.size() - 1) == ']' && this->argu.at(this->argu.size() - 2) != ' '){
+			this->argu = this->argu.substr(0,this->argu.size() - 2);
+		}
+	}
+	else if(this->exe.at(0) == '['){
+		this->argu.insert(0," ");
+		this->argu.insert(0,this->exe.substr(1,this->exe.size()-1));
+		this->exe = "test";
+		if(this->argu.at(this->argu.size() - 1) == ']' && this->argu.at(this->argu.size() - 2) == ' '){
+			this->argu = this->argu.substr(0,this->argu.size() - 3);
+		}
+		else if( this->argu.at(this->argu.size() - 1) == ']' && this->argu.at(this->argu.size() - 2) != ' '){
+			this->argu = this->argu.substr(0,this->argu.size() - 2);
+		}
+	}
 	if(this->exe == "test"){
 		string flag = this->argu.substr(0,2);
 		this->argu = this->argu.substr(3,this->argu.size()-3);
