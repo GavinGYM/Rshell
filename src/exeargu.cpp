@@ -14,10 +14,10 @@ bool ExeArgu::Operate()
 	if(this->exe == "["){
 		this->exe = "test";
 		if(this->argu.at(this->argu.size() - 1) == ']' && this->argu.at(this->argu.size() - 2) == ' '){
-			this->argu = this->argu.substr(0,this->argu.size() - 3);
+			this->argu = this->argu.substr(0,this->argu.size() - 2);
 		}
 		else if( this->argu.at(this->argu.size() - 1) == ']' && this->argu.at(this->argu.size() - 2) != ' '){
-			this->argu = this->argu.substr(0,this->argu.size() - 2);
+			this->argu = this->argu.substr(0,this->argu.size() - 1);
 		}
 	}
 	else if(this->exe.at(0) == '['){
@@ -25,10 +25,10 @@ bool ExeArgu::Operate()
 		this->argu.insert(0,this->exe.substr(1,this->exe.size()-1));
 		this->exe = "test";
 		if(this->argu.at(this->argu.size() - 1) == ']' && this->argu.at(this->argu.size() - 2) == ' '){
-			this->argu = this->argu.substr(0,this->argu.size() - 3);
+			this->argu = this->argu.substr(0,this->argu.size() - 2);
 		}
 		else if( this->argu.at(this->argu.size() - 1) == ']' && this->argu.at(this->argu.size() - 2) != ' '){
-			this->argu = this->argu.substr(0,this->argu.size() - 2);
+			this->argu = this->argu.substr(0,this->argu.size() - 1);
 		}
 	}
 	if(this->exe == "test"){
