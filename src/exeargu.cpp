@@ -9,54 +9,59 @@ using namespace std;
 
 bool ExeArgu::Operate()
 {
-	pid_t pid,pr;
-	pid = fork();
+	if(this->exe == "test"){
+	
+	}
+	else{
+		pid_t pid,pr;
+		pid = fork();
 
-	if (pid < 0) {
-		perror("fork creates child process error!");
-		exit(0);
-	}
-	else if (pid == 0) {
-		if(this->argu == ""){
-			char *argv[] = { const_cast<char*>(this->exe.c_str()),NULL };
-			char* path = const_cast<char*>(this->exe.c_str());
-			int a = execvp(path, argv);
-			if (a == -1) {
-				perror("execution fails!");
-				exit(1);				
-			}
-			else {
-				exit(0);
-			}	
+		if (pid < 0) {
+			perror("fork creates child process error!");
+			exit(0);
 		}
-		else{
-			char *argv[] = { const_cast<char*>(this->exe.c_str()), const_cast<char*>(this->argu.c_str()),NULL };
-			char* path = const_cast<char*>(this->exe.c_str());
-			int a = execvp(path, argv);
-			if (a == -1) {
-				perror("execution fails!");
-				exit(1);	
+		else if (pid == 0) {
+			if(this->argu == ""){
+				char *argv[] = { const_cast<char*>(this->exe.c_str()),NULL };
+				char* path = const_cast<char*>(this->exe.c_str());
+				int a = execvp(path, argv);
+				if (a == -1) {
+					perror("execution fails!");
+					exit(1);				
+				}
+				else {
+					exit(0);
+				}	
 			}
-			else {
-				exit(0);
+			else{
+				char *argv[] = { const_cast<char*>(this->exe.c_str()), const_cast<char*>(this->argu.c_str()),NULL };
+				char* path = const_cast<char*>(this->exe.c_str());
+				int a = execvp(path, argv);
+				if (a == -1) {
+					perror("execution fails!");
+					exit(1);	
+				}
+				else {
+					exit(0);
+				}
 			}
 		}
-	}
-	else {
-		int status;
-		pr = waitpid(pid, &status, 0);
-		if(pr == pid){
-			status = WEXITSTATUS(status);
-			if(status == 1){
+		else {
+			int status;
+			pr = waitpid(pid, &status, 0);
+			if(pr == pid){
+				status = WEXITSTATUS(status);
+				if(status == 1){
+					return false;
+				}
+				else if(status == 0) {
+					return true;
+				}
+			}
+			else{
+				cout << "someerror occured" << endl;
 				return false;
 			}
-			else if(status == 0) {
-				return true;
-			}
-		}
-		else{
-			cout << "someerror occured" << endl;
-			return false;
 		}
 	}
 }
