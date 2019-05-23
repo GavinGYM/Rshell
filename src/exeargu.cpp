@@ -12,38 +12,55 @@ using namespace std;
 bool ExeArgu::Operate()
 { 
 	if(this->exe == "test"){
+		string flag = this->argu.substr(0,2);
+		this->argu = this->argu.substr(3,this->argu.size()-3);
 
-         string flag = this->argu.substr(0,2);
-         this->argu = this->argu.substr(3,this->argu.size()-3);
-                     
-         struct stat buf;
-         if(flag=="-e")
-            {
-             int status = stat(const_cast<char*>(this->argu.c_str()),&buf);
-             if(status==0)
-                 {
-                 cout<<"(True)"<<endl;
-                 return true;
-                 }
-             else
-                {
-                cout<<"(False)"<<endl;
-                return false;
-                }   
-         }
-        else if(flag=="-f"){
-            int status = stat(const_cast<char*>(this->argu.c_str()),&buf);
-            if(status!=0) {cout<<"(False)"<<endl; return false;}
-            if(S_ISREG(buf.st_mode)) {cout<<"(True)"<<endl; return true;}
-            else {cout<<"(False)"<<endl; return false;}	
-	}
-        else if(flag=="-d"){
-            int status = stat(const_cast<char*>(this->argu.c_str()),&buf);
-            if(status!=0) {cout<<"(False)"<<endl; return false;}
-            if(S_ISDIR(buf.st_mode)) {cout<<"(True)"<<endl;return true;}
-            else {cout<<"(False)"<<endl; return false;}
-         }
-      }
+		struct stat buf;
+		if(flag=="-e")
+		{
+			int status = stat(const_cast<char*>(this->argu.c_str()),&buf);
+			if(status==0)
+			{
+				cout<<"(True)"<<endl;
+				return true;
+			}
+			else
+			{
+				cout<<"(False)"<<endl;
+				return false;
+			}  
+		}
+		else if(flag=="-f"){
+			int status = stat(const_cast<char*>(this->argu.c_str()),&buf);
+			if(status!=0) {
+				cout<<"(False)"<<endl; 
+				return false;
+			}
+			if(S_ISREG(buf.st_mode)) {
+				cout<<"(True)"<<endl; 
+				return true;
+			}
+			else {
+				cout<<"(False)"<<endl; 
+				return false;
+			}	
+		}
+		else if(flag=="-d"){
+			int status = stat(const_cast<char*>(this->argu.c_str()),&buf);
+			if(status!=0) {
+				cout<<"(False)"<<endl; 
+				return false;
+			}
+			if(S_ISDIR(buf.st_mode)) {
+				cout<<"(True)"<<endl;
+				return true;
+			}
+			else {
+				cout<<"(False)"<<endl; 
+				return false;
+			}
+		}
+     	}
 	else{
 		pid_t pid,pr;
 		pid = fork();
