@@ -32,11 +32,12 @@ bool ExeArgu::Operate()
 		}
 	}
 	if(this->exe == "test"){
+		string flag;
 		if(this->argu.at(0)!='-'){
-			string flag = "-e";
+			flag = "-e";
 		}
 		else{
-			string flag = this->argu.substr(0,2);
+			flag = this->argu.substr(0,2);
 		}
 		this->argu = this->argu.substr(3,this->argu.size()-3);
 
