@@ -1,1 +1,0 @@
-ls #- a; echo hello && echo "hello && goodbye"; git status; exit
