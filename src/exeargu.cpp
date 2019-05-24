@@ -32,7 +32,12 @@ bool ExeArgu::Operate()
 		}
 	}
 	if(this->exe == "test"){
-		string flag = this->argu.substr(0,2);
+		if(this->argu.at(0)!='-'){
+			string flag = "-e";
+		}
+		else{
+			string flag = this->argu.substr(0,2);
+		}
 		this->argu = this->argu.substr(3,this->argu.size()-3);
 
 		struct stat buf;
@@ -79,6 +84,10 @@ bool ExeArgu::Operate()
 				cout<<"(False)"<<endl; 
 				return false;
 			}
+		}
+		else {
+			cout << "flag doesn't exist, please try again(-e, -f or -d)" << endl;
+			return false;
 		}
      	}
 	else{
