@@ -13,6 +13,8 @@ This is a command shell called rshell in C++ which is made by Yulin Liang and Yi
 2.	Read in a line of command(s) (and connector(s)) from standard input
 >The connector is an optional way you can run multiple commands at once. If a command is followed by ;, then the next command is always >executed; if a command is followed by &&, then the next command is executed only if the first one succeeds; if a command is followed by >||, then the next command is executed only if the first one fails. 
 3.	Execute the appropriate commands using fork, execvp, and waitpid
+4.	A test command which returns 0 (TRUE) if the test succeeds and 1 (FALSE) if the test fails. And the test command also has  a symbolic equivalent \[ \].
+5.	It has Parentheses ( ) as precedence operators in rshell. The parentheses operators are used to change the precedence of the execution of commands, connectors, and chains of connectors.
 
 We designed this program by using composite pattern.
 
@@ -48,6 +50,8 @@ public:
 private:
 	string exe;
 	string argu;
+	vector<int> leftP;
+	vector<int> rightP;
 public:
 	ExeArgu(string e, string a) : exe(e), argu(a) {}
 	~ExeArgu() {
@@ -57,6 +61,13 @@ public:
 	bool Operate();
 	string getExe();
 	string getArgu();
+	vector<int> getLeftP();
+	vector<int> getRightP();
+	void setLeftP(int i);
+	void setRightP(int i);
+	void setExeL();
+	void setExeR();
+	void setArgu();
 };
   ```
    #### Connector
