@@ -38,8 +38,9 @@ bool ExeArgu::Operate()
 		}
 		else{
 			flag = this->argu.substr(0,2);
+			this->argu = this->argu.substr(3,this->argu.size()-3);
 		}
-		this->argu = this->argu.substr(3,this->argu.size()-3);
+		
 
 		struct stat buf;
 		if(flag=="-e")
