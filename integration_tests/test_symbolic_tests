@@ -7,3 +7,4 @@
 [ -d ../src ] && echo "path is a directory"
 [ -d ../srrc ] || echo "path does not exist or path is not a directory"
 [ -d ../src/main.cpp ] || echo "path does not exist or path is not a directory"
+exit

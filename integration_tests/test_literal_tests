@@ -7,3 +7,4 @@ test -f ../src/mains.cpp || echo "path does not exist or path is not a regular f
 test -d ../src && echo "path is a directory"
 test -d ../srrc || echo "path does not exist or path is not a directory"
 test -d ../src/main.cpp || echo "path does not exist or path is not a directory"
+exit
