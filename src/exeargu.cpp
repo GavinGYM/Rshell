@@ -21,14 +21,20 @@ bool ExeArgu::Operate()
 		}
 	}
 	else if(this->exe.at(0) == '['){
-		this->argu.insert(0," ");
-		this->argu.insert(0,this->exe.substr(1,this->exe.size()-1));
-		this->exe = "test";
-		if(this->argu.at(this->argu.size() - 1) == ']' && this->argu.at(this->argu.size() - 2) == ' '){
-			this->argu = this->argu.substr(0,this->argu.size() - 2);
+		if(this->exe.at(this->exe.size()-1) == ']'){
+			this->argu = this->exe.substr(1,this->argu.size() - 2);
+			this->exe = "test";
 		}
-		else if( this->argu.at(this->argu.size() - 1) == ']' && this->argu.at(this->argu.size() - 2) != ' '){
-			this->argu = this->argu.substr(0,this->argu.size() - 1);
+		else{
+			this->argu.insert(0," ");
+			this->argu.insert(0,this->exe.substr(1,this->exe.size()-1));
+			this->exe = "test";
+			if(this->argu.at(this->argu.size() - 1) == ']' && this->argu.at(this->argu.size() - 2) == ' '){
+				this->argu = this->argu.substr(0,this->argu.size() - 2);
+			}
+			else if( this->argu.at(this->argu.size() - 1) == ']' && this->argu.at(this->argu.size() - 2) != ' '){
+				this->argu = this->argu.substr(0,this->argu.size() - 1);
+			}
 		}
 	}
 	if(this->exe == "test"){
