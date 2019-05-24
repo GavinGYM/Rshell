@@ -1,0 +1,10 @@
+test -e ../src/main.cpp && echo "path exists"
+test -e ../src/mains.cpp || echo "path does not exist"
+test -e ../srrc || echo "path does not exist"
+test -f ../src/main.cpp && echo "path is a regular file"
+test -f ../src || echo "path does not exist or path is not a regular file"
+test -f ../src/mains.cpp || echo "path does not exist or path is not a regular file"
+test -d ../src && echo "path is a directory"
+test -d ../srrc || echo "path does not exist or path is not a directory"
+test -d ../src/main.cpp || echo "path does not exist or path is not a directory"
+exit
