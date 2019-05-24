@@ -1,4 +1,6 @@
 [ -e ../src/main.cpp ] && echo "path exists"
+[ ../src/main.cpp ] && echo "path exists"
+[../src/main.cpp] && echo "path exists"
 [ -e ../src/mains.cpp ] || echo "path does not exist"
 [ -e ../srrc ] || echo "path does not exist"
 [ -f ../src/main.cpp ] && echo "path is a regular file"
