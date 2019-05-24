@@ -23,9 +23,7 @@ bool ExeArgu::Operate()
 	else if(this->exe.at(0) == '['){
 		if(this->exe.at(this->exe.size()-1) == ']'){
 			this->argu = this->exe.substr(1,this->exe.size() - 2);
-			cout << this->argu;
 			this->exe = "test";
-			cout << this->exe;
 		}
 		else{
 			this->argu.insert(0," ");
