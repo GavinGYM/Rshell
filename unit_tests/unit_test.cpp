@@ -9,7 +9,6 @@ TEST(RshellBaseTest, DisintegrateTest_ExeArgu) {
 	vector<Command*> com;
 	vector<ExeArgu*> ea;
 	string input = "ls #- a; echo hello && mkdir test || echo \"hello && goodbye\"; git status";
-	//getline(cin, input);
 	Rshellbase *base = new Rshellbase(input);
 	base->Disintegrate(ea, con, com);
 	ASSERT_EQ(con.size(), 5);
@@ -32,7 +31,6 @@ TEST(RshellBaseTest, DisintegrateTest_Connector) {
 	vector<Command*> com;
 	vector<ExeArgu*> ea;
 	string input = "ls #- a; echo hello && mkdir test || echo \"hello && goodbye\"; git status";
-	//getline(cin, input);
 	Rshellbase *base = new Rshellbase(input);
 	base->Disintegrate(ea, con, com);
 	ASSERT_EQ(con.size(), 5);
@@ -50,7 +48,6 @@ TEST(ExeArguTest, GetTest) {
 	vector<Command*> com;
 	vector<ExeArgu*> ea;
 	string input = "ls #- a; echo hello && mkdir test || echo \"hello && goodbye\"; git status";
-	//getline(cin, input);
 	Rshellbase *base = new Rshellbase(input);
 	base->Disintegrate(ea, con, com);
 	ASSERT_EQ(con.size(), 5);
@@ -73,7 +70,6 @@ TEST(ConnectorTest, GetSignTest) {
 	vector<Command*> com;
 	vector<ExeArgu*> ea;
 	string input = "ls #- a; echo hello && mkdir test || echo \"hello && goodbye\"; git status";
-	//getline(cin, input);
 	Rshellbase *base = new Rshellbase(input);
 	base->Disintegrate(ea, con, com);
 	ASSERT_EQ(con.size(), 5);
@@ -91,7 +87,6 @@ TEST(ConnectorTest, OperateTest) {
 	vector<Command*> com;
 	vector<ExeArgu*> ea;
 	string input = "ls #- a; echo hello && mkdir test || echo \"hello && goodbye\"; git status";
-	//getline(cin, input);
 	Rshellbase *base = new Rshellbase(input);
 	base->Disintegrate(ea, con, com);
 	ASSERT_EQ(con.size(), 5);
