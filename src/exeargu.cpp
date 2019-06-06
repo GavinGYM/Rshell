@@ -11,6 +11,107 @@ using namespace std;
 
 bool ExeArgu::Operate()
 { 
+	if (this->argu.at(0) == '>' || this->argu.at(0) == '<' || this->argu.at(0) == '|') {
+		vector<Connector*> connector;
+		vector<ExeArgu*> exeargu;
+		vector<Command*> command;
+
+		string subinput;
+		subinput = this->exe + ' ' + this->argu;
+		while (subinput.find('|') != string::npos || subinput.find('>') != string::npos || subinput.find('<') != string::npos) {
+			int pos = INT_MAX;
+			char con;
+			string cmd;
+			if (subinput.find('<') != string::npos) {
+				pos = subinput.find('<');
+				con = '<';
+			}
+			if (subinput.find('>') != string::npos && (subinput.find('>') < pos)) {
+				pos = subinput.find('>');
+				con = '>';
+			}
+			if (subinput.find('|') != string::npos && (subinput.find('|') < pos)) {
+				pos = subinput.find('|');
+				con = '|';
+			}
+
+			if (con == '<') {
+				cmd = subinput.substr(0, pos - 1);
+				subinput = subinput.substr(pos + 2, subinput.size() - pos - 1);
+			}
+			else if (con == '>') {
+				cmd = subinput.substr(0, pos - 1);
+				subinput = subinput.substr(pos + 2, subinput.size() - pos - 1);
+			}
+			else if (con == '|') {
+				cmd = subinput.substr(0, pos - 1);
+				subinput = subinput.substr(pos + 2, subinput.size() - pos - 1);
+			}
+
+			string argu;
+			string exe;
+			if (cmd.find(" ") != string::npos) {
+				argu = cmd.substr(cmd.find(" ") + 1, cmd.size() - 1);
+				if (argu.at(0) == '\"'&&argu.at(argu.size() - 1) == '\"') {
+					argu = argu.substr(1, argu.size() - 2);
+				}
+				else if (argu.at(0) == '\"'&&argu.at(argu.size() - 2) == '\"'&&argu.at(argu.size() - 1) == ')') {
+					argu = argu.substr(1, argu.size() - 3);
+					argu.append(")");
+				}
+			}
+			else {
+				argu = "";
+			}
+			
+			//This is for the case we have a comment
+			if (argu.find("#") != string::npos) {
+				argu = argu.substr(0, argu.find("#"));
+			}
+			exe = cmd.substr(0, cmd.find(" "));
+
+			ExeArgu *newea = new ExeArgu(exe, argu);
+			exeargu.push_back(newea);
+
+			Connector *newcon;
+			newcon = new Connector(con);
+			connector.push_back(newcon);
+
+			Command *newcom = new Command(newea, newcon);
+			command.push_back(newcom);
+		}
+		//this is for the last command which don't have a connector following it
+		string cmd;
+		cmd = subinput;
+		string argu;
+		string exe;
+		if (cmd.find(" ") != string::npos) {
+			argu = cmd.substr(cmd.find(" ") + 1, cmd.size() - 1);
+			if (argu.at(0) == '\"'&&argu.at(argu.size() - 1) == '\"') {
+				argu = argu.substr(1, argu.size() - 2);
+			}
+			else if (argu.at(0) == '\"'&&argu.at(argu.size() - 2) == '\"'&&argu.at(argu.size() - 1) == ')') {
+				argu = argu.substr(1, argu.size() - 3);
+				argu.append(")");
+			}
+		}
+		else {
+			argu = "";
+		}
+		if (argu.find("#") != string::npos) {
+			argu = argu.substr(0, argu.find("#"));
+		}
+		exe = cmd.substr(0, cmd.find(" "));
+
+		ExeArgu *newea = new ExeArgu(exe, argu);
+		exeargu.push_back(newea);
+		Connector *newcon = new Connector('.');
+		connector.push_back(newcon);
+
+		Command *newcom = new Command(newea, newcon);
+		command.push_back(newcom);
+		return true;
+	}
 	if(this->exe == "["){
 		this->exe = "test";
 		if(this->argu.at(this->argu.size() - 1) == ']' && this->argu.at(this->argu.size() - 2) == ' '){
