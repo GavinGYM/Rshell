@@ -13,7 +13,7 @@ using namespace std;
 bool ExeArgu::Operate()
 { 	
 	//io redirection part
-	if (this->argu.find('>') != string::npos || this->argu.find('<') != string::npos || this->argu.at(0) == '|') {
+	if (this->argu.find('>') != string::npos || this->argu.find('<') != string::npos || this->argu.find('|') != string::npos && this->argu.find("||") == string::npos) {
 		vector<Connector*> connector;
 		vector<ExeArgu*> exeargu;
 		vector<Command*> command;
