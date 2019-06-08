@@ -133,8 +133,8 @@ bool ExeArgu::Operate()
 					exit(0);
 				}
 				else if (pid == 0) {
-					if(command.at(0)->argu == ""){
-						char *argv[] = { const_cast<char*>(exeargu.at(0)->getExe().c_str(),NULL };
+					if(exeargu.at(0)->getArgu() == ""){
+						char *argv[] = { const_cast<char*>(exeargu.at(0)->getExe().c_str()),NULL };
 						char* path = const_cast<char*>(exeargu.at(0)->getExe().c_str());
 						//------------------------------------------------------------------------------
 						int savestdin = dup(0);
@@ -151,7 +151,7 @@ bool ExeArgu::Operate()
 						}	
 					}
 					else{
-						char *argv[] = { const_cast<char*>(exeargu.at(0)->getExe().c_str(), const_cast<char*>(exeargu.at(0)->getArgu().c_str()),NULL };
+						char *argv[] = { const_cast<char*>(exeargu.at(0)->getExe().c_str()), const_cast<char*>(exeargu.at(0)->getArgu().c_str()),NULL };
 						char* path = const_cast<char*>(exeargu.at(0)->getExe().c_str());
 						//------------------------------------------------------------------------------
 						int savestdin = dup(0);
