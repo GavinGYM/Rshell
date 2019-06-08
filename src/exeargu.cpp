@@ -10,7 +10,8 @@
 using namespace std;
 
 bool ExeArgu::Operate()
-{ 
+{ 	
+	//io redirection part
 	if (this->argu.at(0) == '>' || this->argu.at(0) == '<' || this->argu.at(0) == '|') {
 		vector<Connector*> connector;
 		vector<ExeArgu*> exeargu;
@@ -40,8 +41,15 @@ bool ExeArgu::Operate()
 				subinput = subinput.substr(pos + 2, subinput.size() - pos - 1);
 			}
 			else if (con == '>') {
-				cmd = subinput.substr(0, pos - 1);
-				subinput = subinput.substr(pos + 2, subinput.size() - pos - 1);
+				if (subinput.at(subinput.find('>') + 1) == '>') {
+					con = '^'; // '^' stand for ">>"
+					cmd = subinput.substr(0, pos - 1);
+					subinput = subinput.substr(pos + 3, subinput.size() - pos - 1);
+				}
+				else {
+					cmd = subinput.substr(0, pos - 1);
+					subinput = subinput.substr(pos + 2, subinput.size() - pos - 1);
+				}
 			}
 			else if (con == '|') {
 				cmd = subinput.substr(0, pos - 1);
@@ -110,8 +118,14 @@ bool ExeArgu::Operate()
 
 		Command *newcom = new Command(newea, newcon);
 		command.push_back(newcom);
+		
+		
+		
+		
 		return true;
 	}
+	
+	// This part is before assignment 3
 	if(this->exe == "["){
 		this->exe = "test";
 		if(this->argu.at(this->argu.size() - 1) == ']' && this->argu.at(this->argu.size() - 2) == ' '){
