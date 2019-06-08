@@ -188,22 +188,139 @@ bool ExeArgu::Operate()
 					}
 				}
 			}
-/*
+
 			else if(command.at(0)->connector=='>')
-			{
-			    int in=open(command.at(1)->exe,O_CREAT|O_RDWR,0777);
-			    dup2(in,STDOUT_FILENO);
+			{	
+				pid_t pid,pr;
+				pid = fork();
+
+				if (pid < 0) {
+					perror("fork creates child process error!");
+					exit(0);
+				}
+				else if (pid == 0) {
+					if(exeargu.at(0)->getArgu() == ""){
+						char *argv[] = { const_cast<char*>(exeargu.at(0)->getExe().c_str()),NULL };
+						char* path = const_cast<char*>(exeargu.at(0)->getExe().c_str());
+						//------------------------------------------------------------------------------
+						int savestdout = dup(1);
+			    			int in=open(command.at(1)->exe,O_CREAT|O_RDWR,0777);
+			    			dup2(in,1);
+						//------------------------------------------------------------------------------
+						int a = execvp(path, argv);
+						dup2(savestdout,1);
+						if (a == -1) {
+							perror("execution fails!");
+							exit(1);				
+						}
+						else {
+							exit(0);
+						}	
+					}
+					else{
+						char *argv[] = { const_cast<char*>(exeargu.at(0)->getExe().c_str()), const_cast<char*>(exeargu.at(0)->getArgu().c_str()),NULL };
+						char* path = const_cast<char*>(exeargu.at(0)->getExe().c_str());
+						//------------------------------------------------------------------------------
+						int savestdout = dup(1);
+			    			int in=open(command.at(1)->exe,O_CREAT|O_RDWR,0777);
+			    			dup2(in,1);
+						//------------------------------------------------------------------------------
+						int a = execvp(path, argv);
+						dup2(savestdout,1);
+						if (a == -1) {
+							perror("execution fails!");
+							exit(1);	
+						}
+						else {
+							exit(0);
+						}
+					}
+				}
+				else {
+					int status;
+					pr = waitpid(pid, &status, 0);
+					if(pr == pid){
+						status = WEXITSTATUS(status);
+						if(status == 1){
+							return false;
+						}
+						else if(status == 0) {
+							return true;
+						}
+					}
+					else{
+						cout << "someerror occured" << endl;
+						return false;
+					}
+				}
 			}
 
 			else if(command.at(0)->connector=='^')
-			{
-			    int in=open(command.at(1)->exe,O_WRONLY|O_APPEND);
-			    dup2(in,STDOUT_FILENO);
+			{	
+				pid_t pid,pr;
+				pid = fork();
+
+				if (pid < 0) {
+					perror("fork creates child process error!");
+					exit(0);
+				}
+				else if (pid == 0) {
+					if(exeargu.at(0)->getArgu() == ""){
+						char *argv[] = { const_cast<char*>(exeargu.at(0)->getExe().c_str()),NULL };
+						char* path = const_cast<char*>(exeargu.at(0)->getExe().c_str());
+						//------------------------------------------------------------------------------
+						int savestdout = dup(1);
+						int in=open(command.at(1)->exe,O_WRONLY|O_APPEND);
+			    			dup2(in,1);
+						//------------------------------------------------------------------------------
+						int a = execvp(path, argv);
+						dup2(savestdout,1);
+						if (a == -1) {
+							perror("execution fails!");
+							exit(1);				
+						}
+						else {
+							exit(0);
+						}	
+					}
+					else{
+						char *argv[] = { const_cast<char*>(exeargu.at(0)->getExe().c_str()), const_cast<char*>(exeargu.at(0)->getArgu().c_str()),NULL };
+						char* path = const_cast<char*>(exeargu.at(0)->getExe().c_str());
+						//------------------------------------------------------------------------------
+						int savestdout = dup(1);
+						int in=open(command.at(1)->exe,O_WRONLY|O_APPEND);
+			    			dup2(in,1);
+						//------------------------------------------------------------------------------
+						int a = execvp(path, argv);
+						dup2(savestdout,1);
+						if (a == -1) {
+							perror("execution fails!");
+							exit(1);	
+						}
+						else {
+							exit(0);
+						}
+					}
+				}
+				else {
+					int status;
+					pr = waitpid(pid, &status, 0);
+					if(pr == pid){
+						status = WEXITSTATUS(status);
+						if(status == 1){
+							return false;
+						}
+						else if(status == 0) {
+							return true;
+						}
+					}
+					else{
+						cout << "someerror occured" << endl;
+						return false;
+					}
+				}
 			}
-*/
 		}
-		
-		
 		return true;
 	}
 	
