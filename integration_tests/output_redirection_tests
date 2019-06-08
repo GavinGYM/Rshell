@@ -1,0 +1,10 @@
+echo a > outputfile1.txt
+echo b > outputfile2.txt
+echo c >> outputfile2.txt
+cat < names.txt > outputfile3.txt
+cat < names.txt > outputfile4.txt
+cat < names.txt >> outputfile4.txt
+cat > outputfile5.txt < names.txt
+cat > outputfile6.txt < names.txt
+cat >> outputfile6.txt < names.txt
+exit
