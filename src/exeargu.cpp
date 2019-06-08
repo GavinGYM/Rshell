@@ -121,7 +121,7 @@ bool ExeArgu::Operate()
 		command.push_back(newcom);
 		
 		//The integration has finished
-		//Now start the 
+		//Now start the 2 command situation
 		if(command.size() == 2){
 			if(connector.at(0)->GetSign()=='<')
 			{	
@@ -320,6 +320,313 @@ bool ExeArgu::Operate()
 					}
 				}
 			}
+		}
+		
+		
+		//Now start the 3 command situation
+		else if(command.size() == 3){
+			if(connector.at(0)->GetSign()=='<' && connector.at(1)->GetSign()=='>')
+			{	
+				pid_t pid,pr;
+				pid = fork();
+
+				if (pid < 0) {
+					perror("fork creates child process error!");
+					exit(0);
+				}
+				else if (pid == 0) {
+					if(exeargu.at(0)->getArgu() == ""){
+						char *argv[] = { const_cast<char*>(exeargu.at(0)->getExe().c_str()),NULL };
+						char* path = const_cast<char*>(exeargu.at(0)->getExe().c_str());
+						//------------------------------------------------------------------------------
+						int savestdin = dup(0);
+						int in=open(exeargu.at(1)->getExe().c_str(),O_RDONLY,0777); //0777表示文件所有者   该文件用户组     其他用户都有可读可写可执行权限
+			        		dup2(in,0);
+						
+						int savestdout = dup(1);
+			    			int out=open(exeargu.at(2)->getExe().c_str(),O_CREAT|O_TRUNC|O_WRONLY,0777);
+			    			dup2(out,1);
+						//------------------------------------------------------------------------------
+						int a = execvp(path, argv);
+						dup2(savestdin,0);
+						dup2(savestdout,1);
+						if (a == -1) {
+							perror("execution fails!");
+							exit(1);				
+						}
+						else {
+							exit(0);
+						}	
+					}
+					else{
+						char *argv[] = { const_cast<char*>(exeargu.at(0)->getExe().c_str()), const_cast<char*>(exeargu.at(0)->getArgu().c_str()),NULL };
+						char* path = const_cast<char*>(exeargu.at(0)->getExe().c_str());
+						//------------------------------------------------------------------------------
+						int savestdin = dup(0);
+						int in=open(exeargu.at(1)->getExe().c_str(),O_RDONLY,0777); //0777表示文件所有者   该文件用户组     其他用户都有可读可写可执行权限
+			        		dup2(in,0);
+						
+						int savestdout = dup(1);
+			    			int out=open(exeargu.at(2)->getExe().c_str(),O_CREAT|O_TRUNC|O_WRONLY,0777);
+			    			dup2(out,1);
+						//------------------------------------------------------------------------------
+						int a = execvp(path, argv);
+						dup2(savestdin,0);
+						dup2(savestdout,1);
+						if (a == -1) {
+							perror("execution fails!");
+							exit(1);	
+						}
+						else {
+							exit(0);
+						}
+					}
+				}
+				else {
+					int status;
+					pr = waitpid(pid, &status, 0);
+					if(pr == pid){
+						status = WEXITSTATUS(status);
+						if(status == 1){
+							return false;
+						}
+						else if(status == 0) {
+							return true;
+						}
+					}
+					else{
+						cout << "someerror occured" << endl;
+						return false;
+					}
+				}
+			}
+			
+			else if(connector.at(0)->GetSign()=='>' && connector.at(1)->GetSign()=='<')
+			{	
+				pid_t pid,pr;
+				pid = fork();
+
+				if (pid < 0) {
+					perror("fork creates child process error!");
+					exit(0);
+				}
+				else if (pid == 0) {
+					if(exeargu.at(0)->getArgu() == ""){
+						char *argv[] = { const_cast<char*>(exeargu.at(0)->getExe().c_str()),NULL };
+						char* path = const_cast<char*>(exeargu.at(0)->getExe().c_str());
+						//------------------------------------------------------------------------------
+						int savestdin = dup(0);
+						int in=open(exeargu.at(2)->getExe().c_str(),O_RDONLY,0777); //0777表示文件所有者   该文件用户组     其他用户都有可读可写可执行权限
+			        		dup2(in,0);
+						
+						int savestdout = dup(1);
+			    			int out=open(exeargu.at(1)->getExe().c_str(),O_CREAT|O_TRUNC|O_WRONLY,0777);
+			    			dup2(out,1);
+						//------------------------------------------------------------------------------
+						int a = execvp(path, argv);
+						dup2(savestdin,0);
+						dup2(savestdout,1);
+						if (a == -1) {
+							perror("execution fails!");
+							exit(1);				
+						}
+						else {
+							exit(0);
+						}	
+					}
+					else{
+						char *argv[] = { const_cast<char*>(exeargu.at(0)->getExe().c_str()), const_cast<char*>(exeargu.at(0)->getArgu().c_str()),NULL };
+						char* path = const_cast<char*>(exeargu.at(0)->getExe().c_str());
+						//------------------------------------------------------------------------------
+						int savestdin = dup(0);
+						int in=open(exeargu.at(2)->getExe().c_str(),O_RDONLY,0777); //0777表示文件所有者   该文件用户组     其他用户都有可读可写可执行权限
+			        		dup2(in,0);
+						
+						int savestdout = dup(1);
+			    			int out=open(exeargu.at(1)->getExe().c_str(),O_CREAT|O_TRUNC|O_WRONLY,0777);
+			    			dup2(out,1);
+						//------------------------------------------------------------------------------
+						int a = execvp(path, argv);
+						dup2(savestdin,0);
+						dup2(savestdout,1);
+						if (a == -1) {
+							perror("execution fails!");
+							exit(1);	
+						}
+						else {
+							exit(0);
+						}
+					}
+				}
+				else {
+					int status;
+					pr = waitpid(pid, &status, 0);
+					if(pr == pid){
+						status = WEXITSTATUS(status);
+						if(status == 1){
+							return false;
+						}
+						else if(status == 0) {
+							return true;
+						}
+					}
+					else{
+						cout << "someerror occured" << endl;
+						return false;
+					}
+				}
+			}
+			else if(connector.at(0)->GetSign()=='<' && connector.at(1)->GetSign()=='^')
+			{	
+				pid_t pid,pr;
+				pid = fork();
+
+				if (pid < 0) {
+					perror("fork creates child process error!");
+					exit(0);
+				}
+				else if (pid == 0) {
+					if(exeargu.at(0)->getArgu() == ""){
+						char *argv[] = { const_cast<char*>(exeargu.at(0)->getExe().c_str()),NULL };
+						char* path = const_cast<char*>(exeargu.at(0)->getExe().c_str());
+						//------------------------------------------------------------------------------
+						int savestdin = dup(0);
+						int in=open(exeargu.at(1)->getExe().c_str(),O_RDONLY,0777); //0777表示文件所有者   该文件用户组     其他用户都有可读可写可执行权限
+			        		dup2(in,0);
+						
+						int savestdout = dup(1);
+			    			int out=open(exeargu.at(2)->getExe().c_str(),O_WRONLY|O_APPEND);
+			    			dup2(out,1);
+						//------------------------------------------------------------------------------
+						int a = execvp(path, argv);
+						dup2(savestdin,0);
+						dup2(savestdout,1);
+						if (a == -1) {
+							perror("execution fails!");
+							exit(1);				
+						}
+						else {
+							exit(0);
+						}	
+					}
+					else{
+						char *argv[] = { const_cast<char*>(exeargu.at(0)->getExe().c_str()), const_cast<char*>(exeargu.at(0)->getArgu().c_str()),NULL };
+						char* path = const_cast<char*>(exeargu.at(0)->getExe().c_str());
+						//------------------------------------------------------------------------------
+						int savestdin = dup(0);
+						int in=open(exeargu.at(1)->getExe().c_str(),O_RDONLY,0777); //0777表示文件所有者   该文件用户组     其他用户都有可读可写可执行权限
+			        		dup2(in,0);
+						
+						int savestdout = dup(1);
+			    			int out=open(exeargu.at(2)->getExe().c_str(),O_WRONLY|O_APPEND);
+			    			dup2(out,1);
+						//------------------------------------------------------------------------------
+						int a = execvp(path, argv);
+						dup2(savestdin,0);
+						dup2(savestdout,1);
+						if (a == -1) {
+							perror("execution fails!");
+							exit(1);	
+						}
+						else {
+							exit(0);
+						}
+					}
+				}
+				else {
+					int status;
+					pr = waitpid(pid, &status, 0);
+					if(pr == pid){
+						status = WEXITSTATUS(status);
+						if(status == 1){
+							return false;
+						}
+						else if(status == 0) {
+							return true;
+						}
+					}
+					else{
+						cout << "someerror occured" << endl;
+						return false;
+					}
+				}
+			}
+			else if(connector.at(0)->GetSign()=='^' && connector.at(1)->GetSign()=='<')
+			{	
+				pid_t pid,pr;
+				pid = fork();
+
+				if (pid < 0) {
+					perror("fork creates child process error!");
+					exit(0);
+				}
+				else if (pid == 0) {
+					if(exeargu.at(0)->getArgu() == ""){
+						char *argv[] = { const_cast<char*>(exeargu.at(0)->getExe().c_str()),NULL };
+						char* path = const_cast<char*>(exeargu.at(0)->getExe().c_str());
+						//------------------------------------------------------------------------------
+						int savestdin = dup(0);
+						int in=open(exeargu.at(2)->getExe().c_str(),O_RDONLY,0777); //0777表示文件所有者   该文件用户组     其他用户都有可读可写可执行权限
+			        		dup2(in,0);
+						
+						int savestdout = dup(1);
+			    			int out=open(exeargu.at(1)->getExe().c_str(),O_WRONLY|O_APPEND);
+			    			dup2(out,1);
+						//------------------------------------------------------------------------------
+						int a = execvp(path, argv);
+						dup2(savestdin,0);
+						dup2(savestdout,1);
+						if (a == -1) {
+							perror("execution fails!");
+							exit(1);				
+						}
+						else {
+							exit(0);
+						}	
+					}
+					else{
+						char *argv[] = { const_cast<char*>(exeargu.at(0)->getExe().c_str()), const_cast<char*>(exeargu.at(0)->getArgu().c_str()),NULL };
+						char* path = const_cast<char*>(exeargu.at(0)->getExe().c_str());
+						//------------------------------------------------------------------------------
+						int savestdin = dup(0);
+						int in=open(exeargu.at(2)->getExe().c_str(),O_RDONLY,0777); //0777表示文件所有者   该文件用户组     其他用户都有可读可写可执行权限
+			        		dup2(in,0);
+						
+						int savestdout = dup(1);
+			    			int out=open(exeargu.at(1)->getExe().c_str(),O_WRONLY|O_APPEND);
+			    			dup2(out,1);
+						//------------------------------------------------------------------------------
+						int a = execvp(path, argv);
+						dup2(savestdin,0);
+						dup2(savestdout,1);
+						if (a == -1) {
+							perror("execution fails!");
+							exit(1);	
+						}
+						else {
+							exit(0);
+						}
+					}
+				}
+				else {
+					int status;
+					pr = waitpid(pid, &status, 0);
+					if(pr == pid){
+						status = WEXITSTATUS(status);
+						if(status == 1){
+							return false;
+						}
+						else if(status == 0) {
+							return true;
+						}
+					}
+					else{
+						cout << "someerror occured" << endl;
+						return false;
+					}
+				}
+			}
+			
 		}
 		return true;
 	}
