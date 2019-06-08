@@ -142,6 +142,7 @@ bool ExeArgu::Operate()
 			        		dup2(in,0);
 						//------------------------------------------------------------------------------
 						int a = execvp(path, argv);
+						dup2(savestdin,0);
 						if (a == -1) {
 							perror("execution fails!");
 							exit(1);				
@@ -159,6 +160,7 @@ bool ExeArgu::Operate()
 			        		dup2(in,0);
 						//------------------------------------------------------------------------------
 						int a = execvp(path, argv);
+						dup2(savestdin,0);
 						if (a == -1) {
 							perror("execution fails!");
 							exit(1);	
@@ -185,11 +187,6 @@ bool ExeArgu::Operate()
 						return false;
 					}
 				}
-				dup2(savestdin,0);
-			        //比如dup2(3,1) 意思是 把1（stdout） 重定向到 3 所指的文件
-			        //STDIN_FILENO：接收键盘的输入
-			        //STDOUT_FILENO：向屏幕输出
-
 			}
 /*
 			else if(command.at(0)->connector=='>')
