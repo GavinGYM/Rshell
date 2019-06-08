@@ -204,7 +204,7 @@ bool ExeArgu::Operate()
 						char* path = const_cast<char*>(exeargu.at(0)->getExe().c_str());
 						//------------------------------------------------------------------------------
 						int savestdout = dup(1);
-			    			int in=open(exeargu.at(1)->getExe().c_str(),O_CREAT|O_RDWR,0777);
+			    			int in=open(exeargu.at(1)->getExe().c_str(),O_CREAT|O_TRUNC|O_WRONLY,0777);
 			    			dup2(in,1);
 						//------------------------------------------------------------------------------
 						int a = execvp(path, argv);
@@ -222,7 +222,7 @@ bool ExeArgu::Operate()
 						char* path = const_cast<char*>(exeargu.at(0)->getExe().c_str());
 						//------------------------------------------------------------------------------
 						int savestdout = dup(1);
-			    			int in=open(exeargu.at(1)->getExe().c_str(),O_CREAT|O_RDWR,0777);
+			    			int in=open(exeargu.at(1)->getExe().c_str(),O_CREAT|O_TRUNC|O_WRONLY,0777);
 			    			dup2(in,1);
 						//------------------------------------------------------------------------------
 						int a = execvp(path, argv);
