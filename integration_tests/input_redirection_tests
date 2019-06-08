@@ -1,0 +1,8 @@
+cat < names.txt
+cat < names.txt > file1.txt
+cat < names.txt > file2.txt
+cat < names.txt >> file2.txt
+cat > file3.txt < names.txt
+cat > file4.txt < names.txt
+cat >> file4.txt < names.txt
+exit
