@@ -6,6 +6,7 @@
 #include <unistd.h>
 #include <string>
 #include <sys/stat.h>
+#include <fcntl.h>
 
 using namespace std;
 
@@ -122,7 +123,7 @@ bool ExeArgu::Operate()
 		//The integration has finished
 		//Now start the 
 		if(command.size() == 2){
-			if(command.at(0)->connector=='<')
+			if(connector.at(0)->GetSign()=='<')
 			{	
 				pid_t pid,pr;
 				pid = fork();
@@ -133,11 +134,11 @@ bool ExeArgu::Operate()
 				}
 				else if (pid == 0) {
 					if(command.at(0)->argu == ""){
-						char *argv[] = { const_cast<char*>(command.at(0)->exe.c_str()),NULL };
-						char* path = const_cast<char*>(command.at(0)->exe.c_str());
+						char *argv[] = { const_cast<char*>(exeargu.at(0)->getExe().c_str(),NULL };
+						char* path = const_cast<char*>(exeargu.at(0)->getExe().c_str());
 						//------------------------------------------------------------------------------
 						int savestdin = dup(0);
-						int in=open(command.at(1)->exe,O_RDONLY,0777); //0777表示文件所有者   该文件用户组     其他用户都有可读可写可执行权限
+						int in=open(exeargu.at(1)->getExe().c_str(),O_RDONLY,0777); //0777表示文件所有者   该文件用户组     其他用户都有可读可写可执行权限
 			        		dup2(in,0);
 						//------------------------------------------------------------------------------
 						int a = execvp(path, argv);
@@ -150,11 +151,11 @@ bool ExeArgu::Operate()
 						}	
 					}
 					else{
-						char *argv[] = { const_cast<char*>(command.at(0)->exe.c_str()), const_cast<char*>(command.at(0)->argu.c_str()),NULL };
-						char* path = const_cast<char*>(command.at(0)->exe.c_str());
+						char *argv[] = { const_cast<char*>(exeargu.at(0)->getExe().c_str(), const_cast<char*>(exeargu.at(0)->getArgu().c_str()),NULL };
+						char* path = const_cast<char*>(exeargu.at(0)->getExe().c_str());
 						//------------------------------------------------------------------------------
 						int savestdin = dup(0);
-						int in=open(command.at(1)->exe,O_RDONLY,0777); //0777表示文件所有者   该文件用户组     其他用户都有可读可写可执行权限
+						int in=open(exeargu.at(1)->getExe().c_str(),O_RDONLY,0777); //0777表示文件所有者   该文件用户组     其他用户都有可读可写可执行权限
 			        		dup2(in,0);
 						//------------------------------------------------------------------------------
 						int a = execvp(path, argv);
