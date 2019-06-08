@@ -119,7 +119,91 @@ bool ExeArgu::Operate()
 		Command *newcom = new Command(newea, newcon);
 		command.push_back(newcom);
 		
-		
+		//The integration has finished
+		//Now start the 
+		if(command.size() == 2){
+			if(command.at(0)->connector=='<')
+			{	
+				pid_t pid,pr;
+				pid = fork();
+
+				if (pid < 0) {
+					perror("fork creates child process error!");
+					exit(0);
+				}
+				else if (pid == 0) {
+					if(command.at(0)->argu == ""){
+						char *argv[] = { const_cast<char*>(command.at(0)->exe.c_str()),NULL };
+						char* path = const_cast<char*>(command.at(0)->exe.c_str());
+						//------------------------------------------------------------------------------
+						int savestdin = dup(0);
+						int in=open(command.at(1)->exe,O_RDONLY,0777); //0777表示文件所有者   该文件用户组     其他用户都有可读可写可执行权限
+			        		dup2(in,0);
+						//------------------------------------------------------------------------------
+						int a = execvp(path, argv);
+						if (a == -1) {
+							perror("execution fails!");
+							exit(1);				
+						}
+						else {
+							exit(0);
+						}	
+					}
+					else{
+						char *argv[] = { const_cast<char*>(command.at(0)->exe.c_str()), const_cast<char*>(command.at(0)->argu.c_str()),NULL };
+						char* path = const_cast<char*>(command.at(0)->exe.c_str());
+						//------------------------------------------------------------------------------
+						int savestdin = dup(0);
+						int in=open(command.at(1)->exe,O_RDONLY,0777); //0777表示文件所有者   该文件用户组     其他用户都有可读可写可执行权限
+			        		dup2(in,0);
+						//------------------------------------------------------------------------------
+						int a = execvp(path, argv);
+						if (a == -1) {
+							perror("execution fails!");
+							exit(1);	
+						}
+						else {
+							exit(0);
+						}
+					}
+				}
+				else {
+					int status;
+					pr = waitpid(pid, &status, 0);
+					if(pr == pid){
+						status = WEXITSTATUS(status);
+						if(status == 1){
+							return false;
+						}
+						else if(status == 0) {
+							return true;
+						}
+					}
+					else{
+						cout << "someerror occured" << endl;
+						return false;
+					}
+				}
+				dup2(savestdin,0);
+			        //比如dup2(3,1) 意思是 把1（stdout） 重定向到 3 所指的文件
+			        //STDIN_FILENO：接收键盘的输入
+			        //STDOUT_FILENO：向屏幕输出
+
+			}
+/*
+			else if(command.at(0)->connector=='>')
+			{
+			    int in=open(command.at(1)->exe,O_CREAT|O_RDWR,0777);
+			    dup2(in,STDOUT_FILENO);
+			}
+
+			else if(command.at(0)->connector=='^')
+			{
+			    int in=open(command.at(1)->exe,O_WRONLY|O_APPEND);
+			    dup2(in,STDOUT_FILENO);
+			}
+*/
+		}
 		
 		
 		return true;
