@@ -189,7 +189,7 @@ bool ExeArgu::Operate()
 				}
 			}
 
-			else if(command.at(0)->connector=='>')
+			else if(connector.at(0)->GetSign()=='>')
 			{	
 				pid_t pid,pr;
 				pid = fork();
@@ -255,7 +255,7 @@ bool ExeArgu::Operate()
 				}
 			}
 
-			else if(command.at(0)->connector=='^')
+			else if(connector.at(0)->GetSign()=='^')
 			{	
 				pid_t pid,pr;
 				pid = fork();
