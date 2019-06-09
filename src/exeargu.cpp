@@ -328,9 +328,13 @@ bool ExeArgu::Operate()
 						if(pr == pid){
 							status = WEXITSTATUS(status);
 							if(status == 1){
+								close(fd[1]);
+       				 				exit(0);
 								return false;
 							}
 							else if(status == 0) {
+								close(fd[1]);
+       				 				exit(0);
 								return true;
 							}
 						}
@@ -338,10 +342,6 @@ bool ExeArgu::Operate()
 							cout << "someerror occured" << endl;
 							return false;
 						}
-						
-						close(fd[1]);
-						
-       				 		exit(0);
 					}
 					else{
 						char *argv[] = { const_cast<char*>(exeargu.at(0)->getExe().c_str()), const_cast<char*>(exeargu.at(0)->getArgu().c_str()),NULL };
@@ -367,9 +367,13 @@ bool ExeArgu::Operate()
 						if(pr == pid){
 							status = WEXITSTATUS(status);
 							if(status == 1){
+								close(fd[1]);
+       				 				exit(0);
 								return false;
 							}
 							else if(status == 0) {
+								close(fd[1]);
+       				 				exit(0);
 								return true;
 							}
 						}
@@ -377,10 +381,6 @@ bool ExeArgu::Operate()
 							cout << "someerror occured" << endl;
 							return false;
 						}
-						
-						close(fd[1]);
-						
-       				 		exit(0);
 					}
 				}
 			}
