@@ -254,6 +254,136 @@ bool ExeArgu::Operate()
 					}
 				}
 			}
+			
+			else if(connector.at(0)->GetSign()=='|'){
+				
+				pid_t pid,pr;
+				int fd[2];
+
+				if (pipe(fd) == -1) { 
+					perror("pipe error!"); 
+				}
+
+				pid = fork();
+
+				if (pid < 0) {
+					perror("fork error!");
+				}
+				else if (pid == 0) {
+					if(exeargu.at(1)->getArgu() == ""){
+						char *argv[] = { const_cast<char*>(exeargu.at(1)->getExe().c_str()),NULL };
+						char* path = const_cast<char*>(exeargu.at(1)->getExe().c_str());
+						//------------------------------------------------------------------------------
+						close(fd[1]);
+        					dup2(fd[0], STDIN_FILENO);
+						//------------------------------------------------------------------------------
+						int a = execvp(path, argv);
+						if (a == -1) {
+							perror("execution fails!");
+							exit(1);				
+						}
+						else {
+							exit(0);
+						}	
+					}
+					else{
+						char *argv[] = { const_cast<char*>(exeargu.at(1)->getExe().c_str()), const_cast<char*>(exeargu.at(1)->getArgu().c_str()),NULL };
+						char* path = const_cast<char*>(exeargu.at(1)->getExe().c_str());
+						//------------------------------------------------------------------------------
+						close(fd[1]);
+        					dup2(fd[0], STDIN_FILENO);
+						//------------------------------------------------------------------------------
+						int a = execvp(path, argv);
+						if (a == -1) {
+							perror("execution fails!");
+							exit(1);	
+						}
+						else {
+							exit(0);
+						}
+					}
+				}
+				else {
+					if(exeargu.at(0)->getArgu() == ""){
+						char *argv[] = { const_cast<char*>(exeargu.at(0)->getExe().c_str()),NULL };
+						char* path = const_cast<char*>(exeargu.at(0)->getExe().c_str());
+						//------------------------------------------------------------------------------
+						close(fd[0]);
+        					int oldfd = dup(STDOUT_FILENO);
+       				 		int newfd = dup2(fd[1], STDOUT_FILENO);
+						//------------------------------------------------------------------------------
+						int a = execvp(path, argv);
+						if (a == -1) {
+							perror("execution fails!");
+							exit(1);	
+						}
+						else {
+							exit(0);
+						}
+						
+						dup2(oldfd, newfd);
+						
+						int status;
+						pr = waitpid(pid, &status, 0);
+						if(pr == pid){
+							status = WEXITSTATUS(status);
+							if(status == 1){
+								return false;
+							}
+							else if(status == 0) {
+								return true;
+							}
+						}
+						else{
+							cout << "someerror occured" << endl;
+							return false;
+						}
+						
+						close(fd[1]);
+						
+       				 		exit(0);
+					}
+					else{
+						char *argv[] = { const_cast<char*>(exeargu.at(0)->getExe().c_str()), const_cast<char*>(exeargu.at(0)->getArgu().c_str()),NULL };
+						char* path = const_cast<char*>(exeargu.at(0)->getExe().c_str());
+						//------------------------------------------------------------------------------
+						close(fd[0]);
+        					int oldfd = dup(STDOUT_FILENO);
+       				 		int newfd = dup2(fd[1], STDOUT_FILENO);
+						//------------------------------------------------------------------------------
+						int a = execvp(path, argv);
+						if (a == -1) {
+							perror("execution fails!");
+							exit(1);	
+						}
+						else {
+							exit(0);
+						}
+						
+						dup2(oldfd, newfd);
+						
+						int status;
+						pr = waitpid(pid, &status, 0);
+						if(pr == pid){
+							status = WEXITSTATUS(status);
+							if(status == 1){
+								return false;
+							}
+							else if(status == 0) {
+								return true;
+							}
+						}
+						else{
+							cout << "someerror occured" << endl;
+							return false;
+						}
+						
+						close(fd[1]);
+						
+       				 		exit(0);
+					}
+				}
+			}
 
 			else if(connector.at(0)->GetSign()=='^')
 			{	
