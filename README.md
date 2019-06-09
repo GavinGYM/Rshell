@@ -15,6 +15,7 @@ This is a command shell called rshell in C++ which is made by Yulin Liang and Yi
 3.	Execute the appropriate commands using fork, execvp, and waitpid
 4.	A test command which returns 0 (TRUE) if the test succeeds and 1 (FALSE) if the test fails. And the test command also has  a symbolic equivalent \[ \].
 5.	It has Parentheses ( ) as precedence operators in rshell. The parentheses operators are used to change the precedence of the execution of commands, connectors, and chains of connectors.
+6.	Our Rshell properly handles input redirection <, output redirection > and >>, and piping |.
 
 We designed this program by using composite pattern.
 
