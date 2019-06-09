@@ -1,2 +1,3 @@
 ls -l | wc -l
 echo This is a test | tee PipeFile1.txt
+exit
